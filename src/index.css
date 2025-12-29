@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  /* display: flex; REMOVED */
+  /* place-items: center; REMOVED */
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #0a0a0f;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  /* App-like feel */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #12121e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
