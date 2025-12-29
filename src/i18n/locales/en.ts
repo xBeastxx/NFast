@@ -57,6 +57,8 @@ export const en = {
         status: {
             completed: "Transfer Completed Successfully! ✅",
             failed: "Transfer Failed ❌",
+            connecting: "Establishing Connection...",
+            step1_idle: "Ready to Connect",
             starting: "Starting download..."
         },
         logs: {

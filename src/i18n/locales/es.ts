@@ -57,6 +57,8 @@ export const es = {
         status: {
             completed: "¡Transferencia Completada! ✅",
             failed: "Transferencia Fallida ❌",
+            connecting: "Estableciendo Conexión...",
+            step1_idle: "Listo para Conectar",
             starting: "Iniciando descarga..."
         },
         logs: {

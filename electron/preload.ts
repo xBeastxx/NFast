@@ -44,6 +44,11 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
       ipcRenderer.on('croc-finished', subscription);
       return () => ipcRenderer.removeListener('croc-finished', subscription);
     },
+    onHashing: (callback: (e: any, flow: string) => void) => {
+      const subscription = (e: any, flow: string) => callback(e, flow);
+      ipcRenderer.on('croc-hashing', subscription);
+      return () => ipcRenderer.removeListener('croc-hashing', subscription);
+    },
   },
 
   // Utilities

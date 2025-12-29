@@ -8,6 +8,7 @@ interface CrocAPI {
     onProgress: (callback: (e: any, flow: string) => void) => () => void;
     onLog: (callback: (e: any, log: string) => void) => () => void;
     onFinished: (callback: (e: any, code: number) => void) => () => void;
+    onHashing: (callback: (e: any, flow: string) => void) => () => void;
 }
 
 interface Window {

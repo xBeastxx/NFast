@@ -1,4 +1,4 @@
-import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
+import { spawn } from 'child_process';
 import path from 'path';
 import { app, BrowserWindow } from 'electron';
 
@@ -82,30 +82,32 @@ export class CrocHandler {
 
             // NO MORE TIMEOUT - Let croc run normally
 
-            this.currentProcess.on('error', (err) => {
+            this.currentProcess.on('error', (err: Error) => {
                 const msg = `!!! SPAWN ERROR: ${err.message}`;
                 console.error(msg);
                 this.mainWindow?.webContents.send('croc-log', msg);
                 this.mainWindow?.webContents.send('croc-code-generated', 'ERROR: Cannot start croc');
             });
 
-            this.currentProcess.stdout.on('data', (data) => {
+            this.currentProcess.stdout.on('data', (data: Buffer) => {
                 const output = data.toString();
                 this.outputBuffer += output;
                 console.log(`[STDOUT CHUNK] ${output}`);
                 this.mainWindow?.webContents.send('croc-log', `[OUT] ${output}`);
                 this.tryParseCode(output, mode);
+                this.tryParseProgress(output);
             });
 
-            this.currentProcess.stderr.on('data', (data) => {
+            this.currentProcess.stderr.on('data', (data: Buffer) => {
                 const output = data.toString();
                 this.outputBuffer += output;
                 console.error(`[STDERR CHUNK] ${output}`);
                 this.mainWindow?.webContents.send('croc-log', `[ERR] ${output}`);
                 this.tryParseCode(output, mode);
+                this.tryParseProgress(output);
             });
 
-            this.currentProcess.on('close', (code) => {
+            this.currentProcess.on('close', (code: number | null) => {
                 const msg = `Process exited (code: ${code})${this.isKilledManually ? ' [MANUAL KILL]' : ''}`;
                 console.log(msg);
                 this.mainWindow?.webContents.send('croc-log', msg);
@@ -149,6 +151,24 @@ export class CrocHandler {
             console.log(`[CODE DETECTED] ${code}`);
             this.codeDetected = true; // Mark as detected
             this.mainWindow?.webContents.send('croc-code-generated', code);
+        }
+    }
+
+    private tryParseProgress(output: string) {
+        // Simple heuristic: if it contains a percentage %
+        if (output.includes('%')) {
+            // Split by newline OR carriage return to catch progress bar updates
+            const lines = output.split(/[\r\n]+/);
+            for (const line of lines) {
+                const isHashing = line.toLowerCase().includes('hashing');
+                if (line.includes('%')) {
+                    if (isHashing) {
+                        this.mainWindow?.webContents.send('croc-hashing', line.trim());
+                    } else {
+                        this.mainWindow?.webContents.send('croc-progress', line.trim());
+                    }
+                }
+            }
         }
     }
 }
