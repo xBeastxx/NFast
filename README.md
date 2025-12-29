@@ -1,30 +1,37 @@
-# React + TypeScript + Vite
+# NFast PRO
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+NFast is a secure, high-speed file transfer application built with Electron, React, and TypeScript. It utilizes the `croc` protocol for end-to-end encrypted direct data transfer.
 
-Currently, two official plugins are available:
+## Features
+- **Secure Transfer:** End-to-end encryption using PAKE (Password Authenticated Key Exchange).
+- **High Speed:** Direct peer-to-peer transfer via TCP.
+- **Cross-Platform:** Windows compatible (with potential for Mac/Linux).
+- **Stealth/Tunnel Mode:** Direct linking with trusted contacts for automatic code negotiation.
+- **Modern UI:** Built with React, Tailwind CSS, and Framer Motion for a premium experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Development
 
-## Expanding the ESLint configuration
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. Run dev server:
+   ```bash
+   npm run dev
+   ```
 
-- Configure the top-level `parserOptions` property like this:
+3. Build for production:
+   ```bash
+   npm run build
+   ```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Tech Stack
+- Electron
+- React + Vite
+- TypeScript
+- Tailwind CSS
+- Go (Croc binary)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## License
+Copyright © 2025 NauticGames
