@@ -18,13 +18,7 @@
     "directories": {
       "output": "release"
     },
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "NauticGames",
-        "repo": "NFast"
-      }
-    ],
+    "publish": [],
     "files": [
       "dist/**/*",
       "dist-electron/**/*"
