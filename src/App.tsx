@@ -718,7 +718,12 @@ function App() {
                         <div className={`w-1.5 h-1.5 rounded-full ${selectedContact.avatarColor} animate-pulse`}></div>
                         <span className="text-[9px] font-bold text-cyan-400 max-w-[120px] truncate">{t('send.linked', { name: selectedContact.name })}</span>
                         <button
-                          onClick={(e) => { e.stopPropagation(); setSelectedContact(null); }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedContact(null);
+                            setGeneratedCode('');
+                            setInputCode('');
+                          }}
                           className="ml-1 text-cyan-500/50 hover:text-white flex items-center justify-center w-4 h-4 rounded-full hover:bg-white/10"
                           title={t('send.disconnect')}
                         >✕</button>
@@ -890,10 +895,7 @@ function App() {
                 )
               })}
 
-              {/* Add Button Placeholder (or relies on history add) */}
-              <div className="w-12 h-12 rounded-full border border-dashed border-white/10 flex items-center justify-center text-white/20 hover:text-white/50 hover:border-white/30 transition-all cursor-help" title={t('contacts.add_tooltip')}>
-                <span className="text-xl">+</span>
-              </div>
+
             </div>
           </div>
 
