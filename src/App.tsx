@@ -31,7 +31,7 @@ function App() {
   const [deviceId, setDeviceId] = useState('');
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [contacts, setContacts] = useState<Contact[]>([]);
-  const [transferProgress, setTransferProgress] = useState<string>('');
+
   const [editingContactId, setEditingContactId] = useState<string | null>(null);
 
   // New States for Contact Flow logic
@@ -72,6 +72,8 @@ function App() {
 
   // Track active transfer ID for precise cancellation
   const currentTransferIdRef = React.useRef<string | null>(null);
+  // Track filename for history
+  const currentFileNameRef = React.useRef<string | null>(null);
 
   // Auto-scroll logs
   useEffect(() => {
@@ -83,6 +85,9 @@ function App() {
     const filePaths = rawFiles.map(f => f.path).filter(Boolean);
 
     if (filePaths.length > 0) {
+      // Extract filename for history
+      const fileName = filePaths[0].split('\\').pop()?.split('/').pop();
+      currentFileNameRef.current = fileName || null;
       // Check if we are "locked" to a contact
       const codeToUse = selectedContact ? selectedContact.code : (contacts.find(c => c.code === generatedCode)?.code);
 
@@ -160,7 +165,7 @@ function App() {
     const removeCode = window.ipcRenderer.croc.onCodeGenerated((_e, code) => {
       if (code && code !== 'ERROR' && !code.includes('Generating')) {
         setGeneratedCode(code);
-        addToHistory('send', code);
+        addToHistory('send', code, currentFileNameRef.current || undefined);
         setTransferDetails(prev => ({ ...prev, stage: 'connecting' }));
       }
     });
@@ -173,7 +178,7 @@ function App() {
     const removeProgress = window.ipcRenderer.croc.onProgress((_e, flow) => {
       setHashingPercent(100); // Clear hashing when real transfer starts
       // Example flow: " 100% |████| (1.5/1.5 GB, 23 MB/s) [2s:0s]"
-      setTransferProgress(flow);
+
 
       // Parse flow for Rich UI
       // Regex to capture: Percentage, Size Info (between paren and comma), Speed (between comma and paren)
@@ -208,13 +213,13 @@ function App() {
       else if (code === -1) finalStatus = 'cancelled';
 
       if (finalStatus === 'success') {
-        setTransferProgress(t('status.completed'));
+
         setTransferDetails(prev => ({ ...prev, stage: 'finished', percent: 100 }));
       } else if (finalStatus === 'cancelled') {
-        setTransferProgress(t('status.cancelled'));
+
         setTransferDetails(prev => ({ ...prev, stage: 'idle', percent: 0 }));
       } else {
-        setTransferProgress(t('status.failed'));
+
         setTransferDetails(prev => ({ ...prev, stage: 'error' }));
       }
 
@@ -266,7 +271,7 @@ function App() {
 
       const resetDelay = code === -1 ? 500 : 3000;
       setTimeout(() => {
-        setTransferProgress('');
+
         setLog([]);
         setGeneratedCode('');
         setInputCode('');
@@ -347,27 +352,13 @@ function App() {
 
     // @ts-ignore
     const rawFiles = Array.from(e.dataTransfer.files);
-    // @ts-ignore
-    const filePaths = rawFiles.map(f => f.path).filter(Boolean);
-
-    if (filePaths.length > 0) {
-      setGeneratedCode('LOADING');
-      // Extract filename for history (just the first one for display)
-      const fileName = filePaths[0].split('\\').pop()?.split('/').pop();
-
-      try {
-        await window.ipcRenderer.croc.sendFiles(filePaths, undefined, relayAddress);
-      } catch (err) {
-        console.error('IPC Error:', err);
-        setGeneratedCode('ERROR');
-      }
-    }
+    processFiles(rawFiles);
   };
 
   const handleReceive = async () => {
     if (!inputCode) return;
     addToHistory('receive', inputCode);
-    setTransferProgress(t('status.starting'));
+
     await window.ipcRenderer.croc.receiveFile(inputCode, relayAddress);
   };
 
@@ -383,7 +374,7 @@ function App() {
     await window.ipcRenderer.croc.cancel();
     setGeneratedCode('');
     setInputCode('');
-    setTransferProgress('');
+
     setTransferDetails({ stage: 'idle', percent: 0, speed: '', sizeInfo: '', eta: '', fileName: '' });
     setLog([]);
     // Do NOT clear currentTransferIdRef here, let onFinished handle it using the ID to delete the history item.
@@ -391,6 +382,8 @@ function App() {
 
   const isLoading = generatedCode === 'LOADING';
   const hasCode = generatedCode && !isLoading;
+
+  const isTransferActive = transferDetails.stage === 'connecting' || transferDetails.stage === 'transferring';
 
   return (
     <div className="h-screen w-full flex flex-col p-6 select-none bg-gradient-to-br from-[#050510] via-[#0a0a1a] to-[#0f0f20] text-white overflow-hidden">
@@ -414,7 +407,7 @@ function App() {
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <div className="px-4 py-2 rounded-xl bg-white/5 border border-white/5 flex items-center gap-2">
+            <div className="px-4 py-2 rounded-xl bg-white/5 border-2 border-white/20 flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_#22c55e]"></div>
               <span className="text-xs font-mono text-white/50">{t('app.id')}: <span className="text-white font-bold">{deviceId}</span></span>
               <button
@@ -426,7 +419,7 @@ function App() {
             {/* Global Settings Button */}
             <button
               onClick={() => setShowGlobalSettings(true)}
-              className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/5 border border-white/5 text-white/50 hover:text-white hover:bg-white/10 transition-all hover:rotate-90"
+              className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/5 border-2 border-white/20 text-white/50 hover:text-white hover:bg-white/10 transition-all hover:rotate-90"
               title={t('app.settings_button')}
             >
               ⚙️
@@ -438,7 +431,7 @@ function App() {
       {/* --- GLOBAL SETTINGS MODAL --- */}
       {showGlobalSettings && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="w-full max-w-2xl bg-[#0f0f20] border border-white/10 rounded-3xl shadow-2xl flex flex-col h-[600px] max-h-[85vh] transition-all duration-300">
+          <div className="w-full max-w-2xl bg-[#0f0f20] border-2 border-white/20 rounded-3xl shadow-2xl flex flex-col h-[600px] max-h-[85vh] transition-all duration-300">
 
             {/* Modal Header */}
             <div className="flex justify-between items-center p-6 border-b border-white/5 flex-none">
@@ -489,7 +482,7 @@ function App() {
                     <h3 className="text-[10px] uppercase tracking-widest text-white/30 font-bold border-b border-white/5 pb-2">{t('settings.main.general_title')}</h3>
 
                     {/* Language Settings */}
-                    <div className="flex items-center justify-between bg-white/5 p-4 rounded-xl border border-white/5">
+                    <div className="flex items-center justify-between bg-white/5 p-4 rounded-xl border-2 border-white/20">
                       <div className="flex flex-col">
                         <span className="text-sm font-bold text-white/90">{t('settings.main.language')}</span>
                         <span className="text-[10px] text-white/40">Select your preferred language</span>
@@ -511,7 +504,7 @@ function App() {
                     </div>
 
                     {/* Network / Relay Settings */}
-                    <div className="flex flex-col gap-2 bg-white/5 p-4 rounded-xl border border-white/5">
+                    <div className="flex flex-col gap-2 bg-white/5 p-4 rounded-xl border-2 border-white/20">
                       <div className="flex flex-col mb-1">
                         <span className="text-sm font-bold text-white/90">Custom Relay Address</span>
                         <div className="flex items-center gap-2">
@@ -540,7 +533,7 @@ function App() {
                           localStorage.setItem('nfast_relay', e.target.value);
                         }}
                         placeholder="default (public)"
-                        className="bg-black/30 border border-white/10 rounded px-3 py-2 text-white w-full focus:border-cyan-500 outline-none text-xs font-mono"
+                        className="bg-black/30 border border-white/30 rounded px-3 py-2 text-white w-full focus:border-cyan-500 outline-none text-xs font-mono"
                       />
                       <p className="text-[10px] text-white/30 italic mt-1 leading-relaxed border-l-2 border-orange-500/30 pl-2">
                         {t('settings.main.relay_disclaimer')}
@@ -560,21 +553,21 @@ function App() {
                     <div className="grid grid-cols-3 gap-3 h-24">
                       <button
                         onClick={() => setSettingsView('privacy')}
-                        className="bg-white/5 hover:bg-cyan-500/10 border border-white/5 hover:border-cyan-500/30 rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:-translate-y-1 group"
+                        className="bg-white/5 hover:bg-cyan-500/10 border-2 border-white/20 hover:border-cyan-500/30 rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:-translate-y-1 group"
                       >
                         <span className="text-2xl group-hover:scale-110 transition-transform">🔒</span>
                         <span className="text-xs font-bold text-white/70 group-hover:text-cyan-400">{t('settings.main.btn_privacy')}</span>
                       </button>
                       <button
                         onClick={() => setSettingsView('terms')}
-                        className="bg-white/5 hover:bg-purple-500/10 border border-white/5 hover:border-purple-500/30 rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:-translate-y-1 group"
+                        className="bg-white/5 hover:bg-purple-500/10 border-2 border-white/20 hover:border-purple-500/30 rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:-translate-y-1 group"
                       >
                         <span className="text-2xl group-hover:scale-110 transition-transform">📄</span>
                         <span className="text-xs font-bold text-white/70 group-hover:text-purple-400">{t('settings.main.btn_terms')}</span>
                       </button>
                       <button
                         onClick={() => setSettingsView('credits')}
-                        className="bg-white/5 hover:bg-green-500/10 border border-white/5 hover:border-green-500/30 rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:-translate-y-1 group"
+                        className="bg-white/5 hover:bg-green-500/10 border-2 border-white/20 hover:border-green-500/30 rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:-translate-y-1 group"
                       >
                         <span className="text-2xl group-hover:scale-110 transition-transform">⚡</span>
                         <span className="text-xs font-bold text-white/70 group-hover:text-green-400">{t('settings.main.btn_credits')}</span>
@@ -672,7 +665,7 @@ function App() {
         {/* Left Column: Transfer Area (66%) */}
         <div className="col-span-8 flex flex-col min-h-0 relative">
           {/* Tabs */}
-          <div className="flex-none flex p-1.5 bg-surface/30 backdrop-blur-xl rounded-2xl mb-6 shadow-xl border border-white/5">
+          <div className="flex-none flex p-1.5 bg-surface/30 backdrop-blur-xl rounded-2xl mb-6 shadow-xl border-2 border-white/20">
             <button
               onClick={() => setActiveTab('send')}
               className={`flex-1 py-3 text-sm font-semibold rounded-xl transition-all duration-300 ${activeTab === 'send'
@@ -694,7 +687,7 @@ function App() {
           </div>
 
           {/* Action Area CONTAINER */}
-          <div className="flex-1 relative mb-2 overflow-hidden rounded-3xl bg-surface/5 border border-white/5 min-h-0">
+          <div className="flex-1 relative mb-2 overflow-hidden rounded-3xl bg-surface/5 border-2 border-white/20 min-h-0">
 
             {/* --- SEND VIEW --- */}
             <div className={`absolute inset-0 p-1 transition-all duration-500 ease-out flex flex-col ${activeTab === 'send' ? 'opacity-100 translate-x-0 z-10' : 'opacity-0 -translate-x-10 pointer-events-none z-0'}`}>
@@ -711,8 +704,8 @@ function App() {
                 <div
                   className={`flex-1 flex flex-col items-center justify-center border-2 border-dashed rounded-2xl bg-surface/10 backdrop-blur-sm transition-all duration-300 p-2 cursor-pointer relative ${isHovering
                     ? 'border-cyan-500/80 shadow-[0_0_40px_rgba(0,240,255,0.2)] bg-surface/20'
-                    : (selectedContact ? 'border-cyan-500/30 bg-cyan-900/5' : 'border-white/5 hover:border-white/10 hover:bg-white/5')
-                    }`}
+                    : (selectedContact ? 'border-cyan-500/30 bg-cyan-900/5' : 'border-white/30 hover:border-white/50 hover:bg-white/5')
+                    } ${isTransferActive ? 'opacity-50 pointer-events-none grayscale' : ''}`}
                   onDragOver={(e) => { e.preventDefault(); setIsHovering(true); }}
                   onDragLeave={() => setIsHovering(false)}
                   onDrop={handleDrop}
@@ -823,7 +816,7 @@ function App() {
                     onChange={(e) => setInputCode(e.target.value)}
                     placeholder={t('receive.placeholder')}
                     disabled={!!selectedContact}
-                    className={`w-full h-12 bg-black/20 backdrop-blur-xl border border-white/10 focus:border-purple-500/50 text-center text-lg font-mono rounded-xl outline-none transition-all placeholder:text-white/5 shadow-inner focus:shadow-[0_0_30px_rgba(168,85,247,0.2)] ${selectedContact ? 'text-green-400 border-green-500/30' : ''}`}
+                    className={`w-full h-12 bg-black/20 backdrop-blur-xl border border-white/30 focus:border-purple-500/50 text-center text-lg font-mono rounded-xl outline-none transition-all placeholder:text-white/5 shadow-inner focus:shadow-[0_0_30px_rgba(168,85,247,0.2)] ${selectedContact ? 'text-green-400 border-green-500/30' : ''}`}
                   />
                   {selectedContact && (
                     <div className="absolute inset-x-0 -bottom-5 text-center">
@@ -834,8 +827,8 @@ function App() {
 
                 <button
                   onClick={handleReceive}
-                  disabled={!inputCode}
-                  className="w-full shrink-0 h-12 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-sm rounded-xl hover:brightness-110 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-purple-500/20 active:scale-[0.98] flex items-center justify-center"
+                  disabled={!inputCode || isTransferActive}
+                  className="w-full shrink-0 h-12 mt-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-sm rounded-xl hover:brightness-110 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-purple-500/20 active:scale-[0.98] flex items-center justify-center"
                 >
                   {t('receive.initiate')}
                 </button>
@@ -912,7 +905,7 @@ function App() {
         <div className="col-span-4 flex flex-col min-h-0 gap-4">
 
           {/* Card 1: Live Transfer */}
-          <div className="bg-black/20 rounded-3xl border border-white/5 p-4 backdrop-blur-md">
+          <div className="bg-black/20 rounded-3xl border-2 border-white/20 p-4 backdrop-blur-md">
             <h3 className="text-xs uppercase tracking-widest text-white/40 font-bold mb-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className={`w-1.5 h-1.5 rounded-full ${transferDetails.stage === 'idle' ? 'bg-white/20' : transferDetails.stage === 'error' ? 'bg-red-500' : 'bg-cyan-500 animate-pulse'}`}></span>
@@ -937,7 +930,7 @@ function App() {
               </div>
             </h3>
 
-            <div className="bg-surface/30 rounded-xl p-4 border border-white/5 min-h-[200px] flex flex-col relative overflow-hidden">
+            <div className="bg-surface/30 rounded-xl p-4 border-2 border-white/20 min-h-[200px] flex flex-col relative overflow-hidden">
 
               {/* --- PRETTY VIEW (Default) --- */}
               {!showConsole && (
@@ -1043,7 +1036,7 @@ function App() {
           </div>
 
           {/* Card 2: History */}
-          <div className="flex-1 flex flex-col min-h-0 bg-black/20 rounded-3xl border border-white/5 p-4 backdrop-blur-md">
+          <div className="flex-1 flex flex-col min-h-0 bg-black/20 rounded-3xl border-2 border-white/20 p-4 backdrop-blur-md">
             <div className="flex justify-between items-center mb-3">
               <h3 className="text-xs uppercase tracking-widest text-white/40 font-bold flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span> {t('dashboard.recent_uplinks')}
@@ -1065,7 +1058,7 @@ function App() {
                 </div>
               )}
               {history.map((item) => (
-                <div key={item.id} className="relative bg-white/5 p-3 rounded-xl border border-white/5 hover:bg-white/10 transition-colors group">
+                <div key={item.id} className="relative bg-white/5 p-3 rounded-xl border border-white/20 hover:bg-white/10 transition-colors group">
 
                   {/* Delete Item Button (Visible on Hover) */}
                   <button
@@ -1173,7 +1166,7 @@ function App() {
                       <input
                         type="text"
                         defaultValue={contact.name}
-                        className="bg-black/30 border border-white/10 rounded px-3 py-2 text-white w-full focus:border-cyan-500 outline-none"
+                        className="bg-black/30 border border-white/30 rounded px-3 py-2 text-white w-full focus:border-cyan-500 outline-none"
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') {
                             const val = (e.target as HTMLInputElement).value;
@@ -1190,7 +1183,7 @@ function App() {
                   <div>
                     <label className="text-xs text-white/30 uppercase tracking-widest font-bold">SECRET KEY</label>
                     <div className="flex gap-2 relative group">
-                      <div className="p-3 bg-black/30 rounded border border-white/10 font-mono text-xs text-white/50 break-all w-full select-all">
+                      <div className="p-3 bg-black/30 rounded border border-white/30 font-mono text-xs text-white/50 break-all w-full select-all">
                         {contact.code}
                       </div>
                       <button

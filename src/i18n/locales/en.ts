@@ -6,7 +6,7 @@ export const en = {
             subtitle: "Secure Transfer Protocol",
             footer: {
                 by: "BY NauticGames™",
-                version: "v1.0.0 Stable",
+                version: "v1.0.1 Stable",
                 copyright: "© 2025 NauticGames™. All rights reserved."
             },
             id: "ID",

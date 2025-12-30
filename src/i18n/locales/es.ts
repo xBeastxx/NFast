@@ -6,7 +6,7 @@ export const es = {
             subtitle: "Protocolo de Transferencia Seguro",
             footer: {
                 by: "POR NauticGames™",
-                version: "v1.0.0 Estable",
+                version: "v1.0.1 Estable",
                 copyright: "© 2025 NauticGames™. Todos los derechos reservados."
             },
             id: "ID",
