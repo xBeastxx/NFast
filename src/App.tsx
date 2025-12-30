@@ -130,6 +130,13 @@ function App() {
     }
   }, [selectedContact]);
 
+  // Request notification permission on startup
+  useEffect(() => {
+    if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+      Notification.requestPermission();
+    }
+  }, []);
+
   useEffect(() => {
     // 1. Load or Generate Device ID
     const savedId = localStorage.getItem('nfast_device_id');
@@ -271,6 +278,13 @@ function App() {
 
       const resetDelay = code === -1 ? 500 : 3000;
       setTimeout(() => {
+        // Notification at the exact moment of UI reset (3s timing)
+        if (finalStatus !== 'cancelled') {
+          new Notification(t('app.title'), {
+            body: finalStatus === 'success' ? t('status.completed') : t('status.failed'),
+            silent: false
+          });
+        }
 
         setLog([]);
         setGeneratedCode('');

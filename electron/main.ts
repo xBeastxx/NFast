@@ -1,4 +1,5 @@
 import { app, BrowserWindow, Menu, ipcMain, shell } from 'electron'
+import { autoUpdater } from 'electron-updater'
 import { CrocHandler } from './crocHandler'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
@@ -81,4 +82,35 @@ app.on('activate', () => {
   }
 })
 
-app.whenReady().then(createWindow)
+app.whenReady().then(() => {
+  createWindow();
+
+  // Auto-Updater logic
+  autoUpdater.logger = console;
+
+  autoUpdater.on('checking-for-update', () => {
+    console.log('[Updater] Checking for updates...');
+  });
+
+  autoUpdater.on('update-available', (info) => {
+    console.log('[Updater] Update available:', info);
+  });
+
+  autoUpdater.on('update-not-available', (info) => {
+    console.log('[Updater] Update not available:', info);
+  });
+
+  autoUpdater.on('error', (err) => {
+    console.error('[Updater] Error in auto-updater:', err);
+  });
+
+  autoUpdater.on('download-progress', (progressObj) => {
+    console.log(`[Updater] Download speed: ${progressObj.bytesPerSecond} - ${progressObj.percent}%`);
+  });
+
+  autoUpdater.on('update-downloaded', (info) => {
+    console.log('[Updater] Update downloaded:', info);
+  });
+
+  autoUpdater.checkForUpdatesAndNotify();
+})
