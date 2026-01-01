@@ -72,7 +72,7 @@ export const es = {
                 privacy: "Política de Privacidad",
                 terms: "Términos de Servicio",
                 credits: "Créditos",
-                main_subtitle: "Preferencias NFast PRO",
+                main_subtitle: "Preferencias NFast",
                 legal_subtitle: "Legal y Atribución"
             },
             main: {
@@ -91,34 +91,32 @@ export const es = {
             privacy: {
                 last_updated: "Última Actualización: Diciembre 2025",
                 p1_title: "1. RESPONSABLE DE DATOS",
-                p1_text: "El responsable de cualquier dato personal relacionado con NFast PRO es: Manuel Ernesto Pérez Rodríguez e Ivan Manso (NauticGames™). Contacto: nauticgamesstudios@gmail.com",
+                p1_text: "El responsable de cualquier dato personal relacionado con NFast es: Manuel Ernesto Pérez Rodríguez (NauticGames™). Contacto: nauticgamesstudios@gmail.com",
                 p2_title: "2. SOBERANÍA DE DATOS Y ARQUITECTURA P2P",
-                p2_text: "NFast PRO se basa en el principio de privacidad por diseño.\n\nTransferencia de Archivos: NO almacenamos, vemos ni procesamos sus archivos en ningún servidor central. Los archivos se transfieren directamente entre el remitente y el receptor (Peer-to-Peer) utilizando encriptación PAKE (Intercambio de Claves Autenticado por Contraseña).\n\nServidores Relay: Si no es posible una conexión directa, los datos encriptados se enrutan a través de servidores \"Relay\". Estos servidores solo ven \"ruido\" encriptado y no tienen la capacidad técnica para desencriptar sus archivos.",
+                p2_text: "NFast se basa en el principio de privacidad por diseño.\n\nTransferencia de Archivos: NO almacenamos, vemos ni procesamos sus archivos en ningún servidor central. Los archivos se transfieren directamente entre el remitente y el receptor (Peer-to-Peer) utilizando encriptación PAKE (Intercambio de Claves Autenticado por Contraseña).\n\nServidores Relay: Si no es posible una conexión directa, los datos encriptados se enrutan a través de servidores \"Relay\". Estos servidores solo ven \"ruido\" encriptado y no tienen la capacidad técnica para desencriptar sus archivos.",
                 p3_title: "3. INFORMACIÓN QUE RECOPILAMOS",
-                p3_text: "NFast PRO recopila la cantidad mínima absoluta de datos requeridos para funcionar:\n\nDatos Locales: Su lista de contactos, historial de transferencias, ID personal y preferencias se almacenan exclusivamente en su dispositivo (LocalStorage/JSON). Si desinstala la aplicación, estos datos se eliminan permanentemente.\n\nDatos de Diagnóstico (Opcional): Podemos recopilar registros de errores anónimos solo si elige enviárnoslos manualmente para soporte técnico.",
-                p4_title: "4. INFORMACIÓN DE PAGO",
-                p4_text: "No procesamos ni almacenamos su información financiera (tarjetas de crédito, cuentas bancarias). Todas las transacciones para la licencia de NFast PRO son procesadas por plataformas de terceros (p. ej., Stripe, PayPal, App Store) bajo sus propias políticas de seguridad y privacidad.",
-                p5_title: "5. COMPARTIR CON TERCEROS",
-                p5_text: "No vendemos, alquilamos ni compartimos sus datos personales con anunciantes o terceros.",
-                p6_title: "6. CAMBIOS EN ESTA POLÍTICA",
-                p6_text: "Nos reservamos el derecho de modificar esta política. Cualquier cambio significativo se notificará a través de una actualización de la aplicación."
+                p3_text: "NFast recopila la cantidad mínima absoluta de datos requeridos para funcionar:\n\nDatos Locales: Su lista de contactos, historial de transferencias, ID personal y preferencias se almacenan exclusivamente en su dispositivo (LocalStorage/JSON). Si desinstala la aplicación, estos datos se eliminan permanentemente.\n\nDatos de Diagnóstico (Opcional): Podemos recopilar registros de errores anónimos solo si elige enviárnoslos manualmente para soporte técnico.",
+                p4_title: "4. COMPARTIR CON TERCEROS",
+                p4_text: "No vendemos, alquilamos ni compartimos sus datos personales con anunciantes o terceros.",
+                p5_title: "5. CAMBIOS EN ESTA POLÍTICA",
+                p5_text: "Nos reservamos el derecho de modificar esta política. Cualquier cambio significativo se notificará a través de una actualización de la aplicación.",
+
             },
             terms: {
                 last_updated: "Última Actualización: Diciembre 2025",
                 p1_title: "1. ACUERDO LEGAL",
-                p1_text: "Estos Términos de Servicio (\"Términos\") rigen su acceso y uso del software NFast PRO (\"Software\"), desarrollado y operado por Manuel Ernesto Pérez Rodríguez e Ivan Manso, operando comercialmente como NauticGames™ (\"Desarrollador\", \"nosotros\", \"nos\"). Al descargar, instalar o utilizar el Software, usted acepta estar legalmente obligado por estos Términos.",
+                p1_text: "Estos Términos de Servicio (\"Términos\") rigen su acceso y uso del software NFast (\"Software\"), desarrollado y operado por Manuel Ernesto Pérez Rodríguez, operando comercialmente como NauticGames™ (\"Desarrollador\", \"nosotros\", \"nos\"). Al descargar, instalar o utilizar el Software, usted acepta estar legalmente obligado por estos Términos.",
                 p2_title: "2. CONCESIÓN DE LICENCIA",
                 p2_text: "Le otorgamos una licencia revocable, no exclusiva, intransferible y limitada para descargar, instalar y utilizar el Software estrictamente para su uso personal o comercial interno. Está estrictamente prohibido: a) Realizar ingeniería inversa, descompilar o desensamblar el Software. b) Alquilar, arrendar, prestar o sublicenciar el Software a terceros sin consentimiento previo por escrito. c) Utilizar el Software para cualquier actividad ilegal o para la transferencia de material ilícito.",
                 p3_title: "3. PROPIEDAD INTELECTUAL",
-                p3_text: "El Software, incluido su diseño gráfico, interfaz de usuario (UI) y código fuente propietario (excluyendo bibliotecas de terceros mencionadas en los Créditos), es propiedad intelectual exclusiva de Manuel Ernesto Pérez Rodríguez e Ivan Manso.\n\nComponentes de Terceros: Este Software utiliza el protocolo central croc (Licencia MIT) y otras bibliotecas de código abierto. Sus respectivas licencias y atribuciones están disponibles en la sección \"Créditos\" del Software.",
+                p3_text: "El Software, incluido su diseño gráfico, interfaz de usuario (UI) y código fuente propietario (excluyendo bibliotecas de terceros mencionadas en los Créditos), es propiedad intelectual exclusiva de Manuel Ernesto Pérez Rodríguez.\n\nComponentes de Terceros: Este Software utiliza el protocolo central croc (Licencia MIT) y otras bibliotecas de código abierto. Sus respectivas licencias y atribuciones están disponibles en la sección \"Créditos\" del Software.",
                 p4_title: "4. RENUNCIA DE GARANTÍAS",
                 p4_text: "EL SOFTWARE SE PROPORCIONA \"TAL CUAL\" Y \"SEGÚN DISPONIBILIDAD\", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA. NO GARANTIZAMOS QUE: A) EL SOFTWARE ESTÉ LIBRE DE ERRORES U OPERE SIN INTERRUPCIONES. B) EL SOFTWARE SEA COMPATIBLE CON TODO EL HARDWARE O SISTEMAS OPERATIVOS. C) LOS DATOS TRANSFERIDOS ESTÉN COMPLETAMENTE SEGUROS DE ATAQUES SOFISTICADOS DE TERCEROS, A PESAR DEL USO DE ENCRIPTACIÓN PAKE.",
                 p5_title: "5. LIMITACIÓN DE RESPONSABILIDAD",
-                p5_text: "EN LA MEDIDA MÁXIMA PERMITIDA POR LA LEY APLICABLE, EN NINGÚN CASO MANUEL ERNESTO PÉREZ RODRÍGUEZ E IVAN MANSO O NAUTICGAMES™ SERÁN RESPONSABLES DE NINGÚN DAÑO INDIRECTO, INCIDENTAL, ESPECIAL, CONSECUENTE O PUNITIVO, INCLUYENDO PERO NO LIMITADO A: PÉRDIDA DE DATOS, PÉRDIDA DE INGRESOS, INTERRUPCIÓN DEL NEGOCIO O FALLO INFORMÁTICO, QUE SURJA DEL USO O LA IMPOSIBILIDAD DE USO DEL SOFTWARE.",
+                p5_text: "EN LA MEDIDA MÁXIMA PERMITIDA POR LA LEY APLICABLE, EN NINGÚN CASO MANUEL ERNESTO PÉREZ RODRÍGUEZ O NAUTICGAMES™ SERÁN RESPONSABLES DE NINGÚN DAÑO INDIRECTO, INCIDENTAL, ESPECIAL, CONSECUENTE O PUNITIVO, INCLUYENDO PERO NO LIMITADO A: PÉRDIDA DE DATOS, PÉRDIDA DE INGRESOS, INTERRUPCIÓN DEL NEGOCIO O FALLO INFORMÁTICO, QUE SURJA DEL USO O LA IMPOSIBILIDAD DE USO DEL SOFTWARE.",
                 p6_title: "6. NATURALEZA P2P Y RELAYS",
-                p6_text: "Usted reconoce que NFast PRO utiliza una arquitectura Peer-to-Peer. Las velocidades de transferencia y la estabilidad dependen de su conexión a Internet y la del receptor. El Software puede utilizar servidores \"Relay\" (públicos o privados) para establecer conexiones. Si bien el contenido está Encriptado de Extremo a Extremo (E2EE), los metadatos de conexión (direcciones IP) pueden ser visibles para el servidor Relay para facilitar el apretón de manos.\n\nLos Relays personalizados son estrictamente para usuarios avanzados que utilizan infraestructura propia o de terceros. NauticGames™ no es responsable del rendimiento, seguridad o disponibilidad de ninguna dirección de relay personalizada introducida. No proporcionamos soporte técnico para problemas de conexión derivados del uso de relays personalizados.",
-                p7_title: "7. REEMBOLSOS",
-                p7_text: "Como producto de software digital descargable, todas las ventas son finales, a menos que se especifique lo contrario en las políticas de protección al consumidor de la plataforma de distribución (p. ej., Steam, Microsoft Store, App Store)."
+                p6_text: "Usted reconoce que NFast utiliza una arquitectura Peer-to-Peer. Las velocidades de transferencia y la estabilidad dependen de su conexión a Internet y la del receptor. El Software puede utilizar servidores \"Relay\" (públicos o privados) para establecer conexiones. Si bien el contenido está Encriptado de Extremo a Extremo (E2EE), los metadatos de conexión (direcciones IP) pueden ser visibles para el servidor Relay para facilitar el apretón de manos.\n\nLos Relays personalizados son estrictamente para usuarios avanzados que utilizan infraestructura propia o de terceros. NauticGames™ no es responsable del rendimiento, seguridad o disponibilidad de ninguna dirección de relay personalizada introducida. No proporcionamos soporte técnico para problemas de conexión derivados del uso de relays personalizados.",
+
             },
             credits: {
                 powered: "Impulsado por croc",

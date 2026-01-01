@@ -634,12 +634,12 @@ function App() {
                 <div className="space-y-4 animate-in slide-in-from-right duration-300">
                   <div className="text-right text-[10px] text-white/30 italic mr-2">{t('settings.privacy.last_updated')}</div>
                   <div className="space-y-4 text-xs text-white/70 leading-relaxed text-justify p-4 bg-white/5 rounded-xl max-h-[400px] overflow-y-auto custom-scrollbar">
-                    {[1, 2, 3, 4, 5, 6].map(i => (
+                    {[1, 2, 3, 4, 5].map(i => (
                       <div key={i}>
                         <strong className="text-white block mb-1">{t(`settings.privacy.p${i}_title`)}</strong>
                         {/* Render with newlines */}
                         <div className="whitespace-pre-line">{t(`settings.privacy.p${i}_text`)}</div>
-                        {i < 6 && <div className="h-[1px] bg-white/5 my-3"></div>}
+                        {i < 5 && <div className="h-[1px] bg-white/5 my-3"></div>}
                       </div>
                     ))}
                   </div>
@@ -651,11 +651,11 @@ function App() {
                 <div className="space-y-4 animate-in slide-in-from-right duration-300">
                   <div className="text-right text-[10px] text-white/30 italic mr-2">{t('settings.terms.last_updated')}</div>
                   <div className="space-y-4 text-xs text-white/70 leading-relaxed text-justify p-4 bg-white/5 rounded-xl max-h-[400px] overflow-y-auto custom-scrollbar">
-                    {[1, 2, 3, 4, 5, 6, 7].map(i => (
+                    {[1, 2, 3, 4, 5, 6].map(i => (
                       <div key={i}>
                         <strong className="text-white block mb-1">{t(`settings.terms.p${i}_title`)}</strong>
                         <div className="whitespace-pre-line">{t(`settings.terms.p${i}_text`)}</div>
-                        {i < 7 && <div className="h-[1px] bg-white/5 my-3"></div>}
+                        {i < 6 && <div className="h-[1px] bg-white/5 my-3"></div>}
                       </div>
                     ))}
                   </div>

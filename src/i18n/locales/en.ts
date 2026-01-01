@@ -72,7 +72,7 @@ export const en = {
                 privacy: "Privacy Policy",
                 terms: "Terms of Service",
                 credits: "Credits",
-                main_subtitle: "NFast PRO Preferences",
+                main_subtitle: "NFast Preferences",
                 legal_subtitle: "Legal & Attribution"
             },
             main: {
@@ -91,34 +91,32 @@ export const en = {
             privacy: {
                 last_updated: "Last Updated: December 2025",
                 p1_title: "1. DATA CONTROLLER",
-                p1_text: "The controller for any personal data related to NFast PRO is: Manuel Ernesto Perez Rodriguez & Ivan Manso (NauticGames™). Contact: nauticgamesstudios@gmail.com",
+                p1_text: "The controller for any personal data related to NFast is: Manuel Ernesto Perez Rodriguez (NauticGames™). Contact: nauticgamesstudios@gmail.com",
                 p2_title: "2. DATA SOVEREIGNTY AND P2P ARCHITECTURE",
-                p2_text: "NFast PRO is built on the principle of privacy by design.\n\nFile Transfer: We do NOT store, view, or process your files on any central server. Files are transferred directly between the sender and receiver (Peer-to-Peer) using PAKE (Password Authenticated Key Exchange) encryption.\n\nRelay Servers: If a direct connection is not possible, encrypted data is routed through \"Relay\" servers. These servers only see encrypted \"noise\" and do not have the technical capability to decrypt your files.",
+                p2_text: "NFast is built on the principle of privacy by design.\n\nFile Transfer: We do NOT store, view, or process your files on any central server. Files are transferred directly between the sender and receiver (Peer-to-Peer) using PAKE (Password Authenticated Key Exchange) encryption.\n\nRelay Servers: If a direct connection is not possible, encrypted data is routed through \"Relay\" servers. These servers only see encrypted \"noise\" and do not have the technical capability to decrypt your files.",
                 p3_title: "3. INFORMATION WE COLLECT",
-                p3_text: "NFast PRO collects the absolute minimum amount of data required to function:\n\nLocal Data: Your contact list, transfer history, personal ID, and preferences are stored exclusively on your device (LocalStorage/JSON). If you uninstall the application, this data is permanently deleted.\n\nDiagnostic Data (Optional): We may collect anonymous error logs only if you choose to manually send them to us for technical support.",
-                p4_title: "4. PAYMENT INFORMATION",
-                p4_text: "We do not process or store your financial information (credit cards, bank accounts). All transactions for the NFast PRO license are processed by third-party platforms (e.g., Stripe, PayPal, App Store) under their own security and privacy policies.",
-                p5_title: "5. THIRD-PARTY SHARING",
-                p5_text: "We do not sell, rent, or share your personal data with advertisers or third parties.",
-                p6_title: "6. CHANGES TO THIS POLICY",
-                p6_text: "We reserve the right to modify this policy. Any significant changes will be notified through an application update."
+                p3_text: "NFast collects the absolute minimum amount of data required to function:\n\nLocal Data: Your contact list, transfer history, personal ID, and preferences are stored exclusively on your device (LocalStorage/JSON). If you uninstall the application, this data is permanently deleted.\n\nDiagnostic Data (Optional): We may collect anonymous error logs only if you choose to manually send them to us for technical support.",
+                p4_title: "4. THIRD-PARTY SHARING",
+                p4_text: "We do not sell, rent, or share your personal data with advertisers or third parties.",
+                p5_title: "5. CHANGES TO THIS POLICY",
+                p5_text: "We reserve the right to modify this policy. Any significant changes will be notified through an application update.",
+
             },
             terms: {
                 last_updated: "Last Updated: December 2025",
                 p1_title: "1. LEGAL AGREEMENT",
-                p1_text: "These Terms of Service (\"Terms\") govern your access to and use of the software NFast PRO (\"Software\"), developed and operated by Manuel Ernesto Perez Rodriguez & Ivan Manso, doing business as NauticGames™ (\"Developer\", \"we\", \"us\"). By downloading, installing, or using the Software, you agree to be legally bound by these Terms.",
+                p1_text: "These Terms of Service (\"Terms\") govern your access to and use of the software NFast (\"Software\"), developed and operated by Manuel Ernesto Perez Rodriguez, doing business as NauticGames™ (\"Developer\", \"we\", \"us\"). By downloading, installing, or using the Software, you agree to be legally bound by these Terms.",
                 p2_title: "2. GRANT OF LICENSE",
                 p2_text: "We grant you a revocable, non-exclusive, non-transferable, limited license to download, install, and use the Software strictly for your personal or internal commercial use. You are strictly prohibited from: a) Reverse engineering, decompiling, or disassembling the Software. b) Renting, leasing, lending, or sublicensing the Software to third parties without prior written consent. c) Using the Software for any unlawful activity or for the transfer of illicit material.",
                 p3_title: "3. INTELLECTUAL PROPERTY",
-                p3_text: "The Software, including its graphic design, user interface (UI), and proprietary source code (excluding third-party libraries mentioned in the Credits), is the exclusive intellectual property of Manuel Ernesto Perez Rodriguez & Ivan Manso.\n\nThird-Party Components: This Software utilizes the croc core protocol (MIT License) and other open-source libraries. Their respective licenses and attributions are available in the \"Credits\" section of the Software.",
+                p3_text: "The Software, including its graphic design, user interface (UI), and proprietary source code (excluding third-party libraries mentioned in the Credits), is the exclusive intellectual property of Manuel Ernesto Perez Rodriguez.\n\nThird-Party Components: This Software utilizes the croc core protocol (MIT License) and other open-source libraries. Their respective licenses and attributions are available in the \"Credits\" section of the Software.",
                 p4_title: "4. DISCLAIMER OF WARRANTIES",
                 p4_text: "THE SOFTWARE IS PROVIDED \"AS IS\" AND \"AS AVAILABLE\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. WE DO NOT WARRANT THAT: A) THE SOFTWARE WILL BE ERROR-FREE OR OPERATE WITHOUT INTERRUPTION. B) THE SOFTWARE IS COMPATIBLE WITH ALL HARDWARE OR OPERATING SYSTEMS. C) DATA TRANSFERRED IS COMPLETELY SECURE FROM SOPHISTICATED THIRD-PARTY ATTACKS, DESPITE THE USE OF PAKE ENCRYPTION.",
                 p5_title: "5. LIMITATION OF LIABILITY",
-                p5_text: "TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL MANUEL ERNESTO PEREZ RODRIGUEZ & IVAN MANSO OR NAUTICGAMES™ BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO: LOSS OF DATA, LOSS OF REVENUE, BUSINESS INTERRUPTION, OR COMPUTER FAILURE, ARISING OUT OF THE USE OR INABILITY TO USE THE SOFTWARE.",
+                p5_text: "TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL MANUEL ERNESTO PEREZ RODRIGUEZ OR NAUTICGAMES™ BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO: LOSS OF DATA, LOSS OF REVENUE, BUSINESS INTERRUPTION, OR COMPUTER FAILURE, ARISING OUT OF THE USE OR INABILITY TO USE THE SOFTWARE.",
                 p6_title: "6. P2P NATURE AND RELAYS",
-                p6_text: "You acknowledge that NFast PRO uses a Peer-to-Peer architecture. Transfer speeds and stability depend on your and the receiver's internet connection. The Software may utilize \"Relay\" servers (public or private) to establish connections. While content is End-to-End Encrypted (E2EE), connection metadata (IP addresses) may be visible to the Relay server to facilitate the handshake.\n\nCustom Relays are strictly for advanced users utilizing self-hosted or third-party infrastructure. NauticGames™ is not responsible for the performance, security, or availability of any custom relay address entered. We do not provide technical support for connection issues arising from the use of custom relays.",
-                p7_title: "7. REFUNDS",
-                p7_text: "As a downloadable digital software product, all sales are final, unless otherwise specified by the distribution platform's (e.g., Steam, Microsoft Store, App Store) consumer protection policies."
+                p6_text: "You acknowledge that NFast uses a Peer-to-Peer architecture. Transfer speeds and stability depend on your and the receiver's internet connection. The Software may utilize \"Relay\" servers (public or private) to establish connections. While content is End-to-End Encrypted (E2EE), connection metadata (IP addresses) may be visible to the Relay server to facilitate the handshake.\n\nCustom Relays are strictly for advanced users utilizing self-hosted or third-party infrastructure. NauticGames™ is not responsible for the performance, security, or availability of any custom relay address entered. We do not provide technical support for connection issues arising from the use of custom relays.",
+
             },
             credits: {
                 powered: "Powered by croc",
