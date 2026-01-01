@@ -53,4 +53,11 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 
   // Utilities
   openExternal: (url: string) => ipcRenderer.invoke('open-external', url),
+
+  // Window controls
+  window: {
+    minimize: () => ipcRenderer.invoke('window-minimize'),
+    maximize: () => ipcRenderer.invoke('window-maximize'),
+    close: () => ipcRenderer.invoke('window-close'),
+  },
 })

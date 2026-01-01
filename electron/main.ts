@@ -28,6 +28,7 @@ function createWindow() {
     height: 800, // Increased default height
     minWidth: 800,
     minHeight: 600,
+    frame: false, // Remove window borders
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
     },
@@ -61,6 +62,23 @@ function createWindow() {
   // Handle external links securely
   ipcMain.handle('open-external', async (_, url: string) => {
     await shell.openExternal(url);
+  });
+
+  // Window controls
+  ipcMain.handle('window-minimize', () => {
+    win?.minimize();
+  });
+
+  ipcMain.handle('window-maximize', () => {
+    if (win?.isMaximized()) {
+      win?.restore();
+    } else {
+      win?.maximize();
+    }
+  });
+
+  ipcMain.handle('window-close', () => {
+    win?.close();
   });
 }
 

@@ -400,10 +400,48 @@ function App() {
   const isTransferActive = transferDetails.stage === 'connecting' || transferDetails.stage === 'transferring';
 
   return (
-    <div className="h-screen w-full flex flex-col p-6 select-none bg-gradient-to-br from-[#050510] via-[#0a0a1a] to-[#0f0f20] text-white overflow-hidden">
+    <div className="h-screen w-full flex flex-col select-none bg-gradient-to-br from-[#050510] via-[#0a0a1a] to-[#0f0f20] text-white overflow-hidden">
+
+      {/* Custom Title Bar with Window Controls */}
+      <div className="flex-none w-full h-8 flex items-center justify-between bg-black/40 border-b border-white/10 px-2" style={{ WebkitAppRegion: 'drag' } as any}>
+        <div className="flex items-center gap-2 text-[10px] text-white/40 uppercase tracking-widest">
+          <span>{t('app.title')}</span>
+        </div>
+
+        {/* Window Controls */}
+        <div className="flex items-center gap-1" style={{ WebkitAppRegion: 'no-drag' } as any}>
+          <button
+            onClick={() => window.ipcRenderer.window.minimize()}
+            className="w-8 h-8 flex items-center justify-center hover:bg-white/10 transition-colors text-white/50 hover:text-white"
+            title="Minimizar"
+          >
+            <svg width="10" height="10" viewBox="0 0 10 10">
+              <path d="M 0,5 10,5" stroke="currentColor" strokeWidth="1" />
+            </svg>
+          </button>
+          <button
+            onClick={() => window.ipcRenderer.window.maximize()}
+            className="w-8 h-8 flex items-center justify-center hover:bg-white/10 transition-colors text-white/50 hover:text-white"
+            title="Maximizar/Restaurar"
+          >
+            <svg width="10" height="10" viewBox="0 0 10 10">
+              <path d="M 0,0 0,10 10,10 10,0 Z M 1,1 9,1 9,9 1,9 Z" fill="currentColor" />
+            </svg>
+          </button>
+          <button
+            onClick={() => window.ipcRenderer.window.close()}
+            className="w-8 h-8 flex items-center justify-center hover:bg-red-500 transition-colors text-white/50 hover:text-white"
+            title="Cerrar"
+          >
+            <svg width="10" height="10" viewBox="0 0 10 10">
+              <path d="M 0,0 10,10 M 10,0 0,10" stroke="currentColor" strokeWidth="1" />
+            </svg>
+          </button>
+        </div>
+      </div>
 
       {/* Header */}
-      <div className="flex-none w-full h-16 flex justify-between items-center mb-6">
+      <div className="flex-none w-full h-16 flex justify-between items-center mb-6 px-6 pt-4">
         <div className="flex items-center gap-4">
           <div className="flex flex-col">
             <h1 className="text-3xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 animate-pulse">
@@ -674,7 +712,7 @@ function App() {
       )}
 
       {/* Main Grid Layout */}
-      <div className="flex-1 grid grid-cols-12 gap-6 min-h-0">
+      <div className="flex-1 grid grid-cols-12 gap-6 min-h-0 px-6 pb-6">
 
         {/* Left Column: Transfer Area (66%) */}
         <div className="col-span-8 flex flex-col min-h-0 relative">

@@ -17,5 +17,10 @@ interface Window {
         openExternal: (url: string) => Promise<void>;
         invoke: (channel: string, ...args: any[]) => Promise<any>;
         on: (channel: string, listener: (event: any, ...args: any[]) => void) => void;
+        window: {
+            minimize: () => Promise<void>;
+            maximize: () => Promise<void>;
+            close: () => Promise<void>;
+        };
     }
 }
