@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && electron-builder",
+    "build": "vite build",
+    "package": "npm run build && electron-builder",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -18,14 +19,21 @@
     "directories": {
       "output": "release"
     },
-    "publish": [],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "xBeastxx",
+        "repo": "NFast"
+      }
+    ],
     "files": [
       "dist/**/*",
       "dist-electron/**/*"
     ],
     "win": {
       "target": "nsis",
-      "requestedExecutionLevel": "asInvoker"
+      "requestedExecutionLevel": "asInvoker",
+      "publisherName": "NauticGames"
     },
     "nsis": {
       "oneClick": false,
