@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./dist/icon.png" alt="NFast Logo" width="128" height="128" />
+<img src="./src/assets/NFastIcon.png" alt="NFast Logo" width="128" height="128" />
 
 # ⚡ NFast PRO
 
