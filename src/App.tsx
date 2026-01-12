@@ -403,7 +403,7 @@ function App() {
     <div className="h-screen w-full flex flex-col select-none bg-background text-white overflow-hidden">
 
       {/* Custom Title Bar with Window Controls */}
-      <div className="flex-none w-full h-8 flex items-center justify-between bg-black/40 border-b border-white/10 px-2" style={{ WebkitAppRegion: 'drag' } as any}>
+      <div className="flex-none w-full h-8 flex items-center justify-between bg-black/40 border-b border-white/30 px-2" style={{ WebkitAppRegion: 'drag' } as any}>
         <div className="flex items-center gap-2 text-[10px] text-white/70 uppercase tracking-widest">
           <span>{t('app.title')}</span>
         </div>
@@ -445,14 +445,14 @@ function App() {
         <div className="flex items-center gap-4">
           <div className="flex flex-col">
             <h1 className="text-3xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 animate-pulse">
-              {t('app.title')} <span className="text-xs text-white/60 font-normal align-top border border-white/10 rounded px-1">{t('app.pro')}</span>
+              {t('app.title')} <span className="text-xs text-white/80 font-normal align-top border border-white/30 rounded px-1">{t('app.pro')}</span>
             </h1>
-            <span className="text-[10px] text-white/50 tracking-widest uppercase ml-1">{t('app.subtitle')}</span>
+            <span className="text-[10px] text-white/70 tracking-widest uppercase ml-1">{t('app.subtitle')}</span>
           </div>
           {/* Branding moved here */}
           <div className="h-8 w-[1px] bg-white/10 mx-2"></div> {/* Separator */}
           <div className="flex flex-col">
-            <div className="text-[10px] text-white/60 font-bold tracking-widest">{t('app.footer.by')}</div>
+            <div className="text-[10px] text-white/80 font-bold tracking-widest">{t('app.footer.by')}</div>
             <div className="text-[8px] text-white/10">{t('app.footer.version')}</div>
           </div>
         </div>
@@ -483,24 +483,28 @@ function App() {
       {/* --- GLOBAL SETTINGS MODAL --- */}
       {showGlobalSettings && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="w-full max-w-2xl bg-surface border-2 border-white/10 rounded-3xl shadow-2xl flex flex-col h-[600px] max-h-[85vh] transition-all duration-300">
+          <div className="w-full max-w-2xl bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-purple-500/10 backdrop-blur-xl border border-white/20 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] rounded-3xl shadow-2xl flex flex-col h-[600px] max-h-[85vh] transition-all duration-300">
 
             {/* Modal Header */}
-            <div className="flex justify-between items-center p-6 border-b border-white/5 flex-none">
-              <div className="flex items-center gap-3">
+            <div className="flex justify-between items-center p-6 border-b border-white/10 flex-none relative overflow-hidden">
+              {/* Decorative Header Line */}
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
+
+              <div className="flex items-center gap-3 relative z-10">
                 {settingsView !== 'main' && (
                   <button
                     onClick={() => setSettingsView('main')}
-                    className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors mr-1"
+                    className="w-8 h-8 rounded-lg border border-white/20 hover:border-cyan-500/50 hover:bg-cyan-500/10 flex items-center justify-center text-white/80 hover:text-cyan-400 transition-all active:scale-95"
                   >
                     ←
                   </button>
                 )}
                 <div>
-                  <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                  <h2 className="text-xl font-bold text-white flex items-center gap-2 tracking-wider">
                     {settingsView === 'main' ? (
                       <>
-                        <span className="text-cyan-400">{t('settings.header.main')}</span>
+                        <span className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">{t('settings.header.main')}</span>
+                        <span className="text-[10px] bg-cyan-500/10 border border-cyan-500/20 px-1.5 rounded text-cyan-500">SYS</span>
                       </>
                     ) : settingsView === 'privacy' ? (
                       <span className="text-cyan-400">{t('settings.header.privacy')}</span>
@@ -510,16 +514,13 @@ function App() {
                       <span className="text-green-400">{t('settings.header.credits')}</span>
                     )}
                   </h2>
-                  <p className="text-xs text-white/70 uppercase tracking-widest mt-1">
-                    {settingsView === 'main' ? t('settings.header.main_subtitle') : t('settings.header.legal_subtitle')}
-                  </p>
                 </div>
               </div>
               <button
                 onClick={() => setShowGlobalSettings(false)}
-                className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                className="w-8 h-8 rounded-lg border border-white/20 hover:border-red-500/50 hover:bg-red-500/10 flex items-center justify-center text-white/80 hover:text-red-400 transition-all active:scale-95 group"
               >
-                ✕
+                <span className="group-hover:rotate-90 transition-transform">✕</span>
               </button>
             </div>
 
@@ -531,39 +532,52 @@ function App() {
                 <div className="flex flex-col h-full">
                   {/* Language Settings */}
                   <div className="flex flex-col gap-4 mb-6">
-                    <h3 className="text-[10px] uppercase tracking-widest text-white/60 font-bold border-b border-white/5 pb-2">{t('settings.main.general_title')}</h3>
+                    <h3 className="text-[10px] uppercase tracking-widest text-white/80 font-bold border-b border-white/20 pb-2">{t('settings.main.general_title')}</h3>
 
                     {/* Language Settings */}
-                    <div className="flex items-center justify-between bg-white/5 p-4 rounded-xl border-2 border-white/10">
-                      <div className="flex flex-col">
-                        <span className="text-sm font-bold text-white/90">{t('settings.main.language')}</span>
-                        <span className="text-[10px] text-white/70">Select your preferred language</span>
+                    <div className="flex items-center justify-between bg-black/20 p-4 relative group overflow-hidden">
+                      {/* Tactical Corners */}
+                      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20"></div>
+                      <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20"></div>
+                      <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/20"></div>
+                      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20"></div>
+
+                      <div className="flex flex-col relative z-10">
+                        <span className="text-sm font-bold text-white/90 tracking-wider">LANGUAGE PROTOCOL</span>
+                        <span className="text-[10px] text-white/50 uppercase tracking-widest">Interface Localization</span>
                       </div>
-                      <div className="flex items-center bg-black/20 rounded-lg p-1 border border-white/10">
+
+                      <div className="flex items-center gap-2 relative z-10">
                         <button
                           onClick={() => changeLanguage('en')}
-                          className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${i18n.language.startsWith('en') ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30' : 'text-white/70 hover:text-white hover:bg-white/5'}`}
+                          className={`px-4 py-2 text-[10px] font-bold tracking-widest transition-all skew-x-[10deg] border ${i18n.language.startsWith('en') ? 'bg-cyan-500/20 text-cyan-400 border-cyan-500/50 shadow-[0_0_10px_rgba(6,182,212,0.3)]' : 'border-white/10 text-white/40 hover:text-white hover:border-white/30'}`}
                         >
-                          English
+                          <span className="-skew-x-[10deg] block">ENG</span>
                         </button>
                         <button
                           onClick={() => changeLanguage('es')}
-                          className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${i18n.language.startsWith('es') ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30' : 'text-white/70 hover:text-white hover:bg-white/5'}`}
+                          className={`px-4 py-2 text-[10px] font-bold tracking-widest transition-all skew-x-[10deg] border ${i18n.language.startsWith('es') ? 'bg-cyan-500/20 text-cyan-400 border-cyan-500/50 shadow-[0_0_10px_rgba(6,182,212,0.3)]' : 'border-white/10 text-white/40 hover:text-white hover:border-white/30'}`}
                         >
-                          Español
+                          <span className="-skew-x-[10deg] block">ESP</span>
                         </button>
                       </div>
                     </div>
 
                     {/* Network / Relay Settings */}
-                    <div className="flex flex-col gap-2 bg-white/5 p-4 rounded-xl border-2 border-white/10">
-                      <div className="flex flex-col mb-1">
-                        <span className="text-sm font-bold text-white/90">Custom Relay Address</span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[10px] text-white/70">{t('settings.main.relay_input_note')}</span>
+                    <div className="flex flex-col gap-3 bg-black/20 p-4 relative group">
+                      {/* Tactical Corners */}
+                      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20"></div>
+                      <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20"></div>
+                      <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/20"></div>
+                      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20"></div>
+
+                      <div className="flex flex-col mb-1 relative z-10">
+                        <span className="text-sm font-bold text-white/90 tracking-wider">RELAY NODE</span>
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] text-white/50 uppercase tracking-widest">{t('settings.main.relay_input_note')}</span>
                           <button
                             onClick={() => setShowRelayHelp(!showRelayHelp)}
-                            className="text-[10px] bg-white/5 hover:bg-white/10 text-cyan-400 px-2 py-0.5 rounded border border-cyan-500/20 transition-all"
+                            className="text-[9px] text-cyan-500 hover:text-cyan-400 uppercase tracking-widest border border-cyan-500/30 px-2 py-0.5"
                           >
                             {t('settings.main.relay_help_btn')}
                           </button>
@@ -572,57 +586,73 @@ function App() {
 
                       {/* Help Text Block */}
                       {showRelayHelp && (
-                        <div className="bg-cyan-500/5 border border-cyan-500/10 p-3 rounded mb-2 text-[10px] text-white leading-relaxed font-mono">
+                        <div className="bg-cyan-900/20 border-l-2 border-cyan-500 p-2 text-[10px] text-cyan-100/80 font-mono mb-2 animate-in slide-in-from-top-2">
                           {t('settings.main.relay_help_text')}
                         </div>
                       )}
 
-                      <input
-                        type="text"
-                        value={relayAddress}
-                        onChange={(e) => {
-                          setRelayAddress(e.target.value);
-                          localStorage.setItem('nfast_relay', e.target.value);
-                        }}
-                        placeholder="default (public)"
-                        className="bg-black/20 border border-white/20 rounded px-3 py-2 text-white w-full focus:border-cyan-500 outline-none text-xs font-mono"
-                      />
-                      <p className="text-[10px] text-white/60 italic mt-1 leading-relaxed border-l-2 border-orange-500/30 pl-2">
+                      <div className="relative group/input">
+                        <div className={`absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded opacity-0 group-focus-within/input:opacity-100 transition-opacity blur`}></div>
+                        <input
+                          type="text"
+                          value={relayAddress}
+                          onChange={(e) => {
+                            setRelayAddress(e.target.value);
+                            localStorage.setItem('nfast_relay', e.target.value);
+                          }}
+                          placeholder="DEFAULT (PUBLIC)"
+                          className="relative w-full bg-black/60 border border-white/10 p-3 text-white focus:border-cyan-500/50 outline-none text-xs font-mono tracking-wider shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] placeholder:text-white/20"
+                        />
+                      </div>
+
+                      <p className="text-[9px] text-white/40 italic flex items-center gap-2">
+                        <span className="w-1 h-1 bg-orange-500 rounded-full animate-pulse"></span>
                         {t('settings.main.relay_disclaimer')}
                       </p>
                     </div>
                   </div>
 
                   {/* Placeholder for Future Settings */}
-                  <div className="flex-1 flex flex-col items-center justify-center text-center opacity-30 border border-dashed border-white/10 rounded-2xl mb-6 min-h-[100px]">
+                  <div className="flex-1 flex flex-col items-center justify-center text-center opacity-30 border border-dashed border-white/30 rounded-2xl mb-6 min-h-[100px]">
                     <span className="text-4xl mb-4">⚙️</span>
                     <p className="text-[10px] mt-1">{t('settings.main.coming_soon')}</p>
                   </div>
 
                   {/* Bottom Navigation Buttons */}
-                  <div className="flex-none pt-4 border-t border-white/5">
-                    <h3 className="text-[10px] uppercase tracking-widest text-white/60 font-bold mb-3">{t('settings.main.about_legal')}</h3>
-                    <div className="grid grid-cols-3 gap-3 h-24">
+                  <div className="flex-none pt-4 border-t border-white/10">
+                    <h3 className="text-[9px] uppercase tracking-[0.2em] text-white/40 font-bold mb-4">{t('settings.main.about_legal')}</h3>
+                    <div className="grid grid-cols-3 gap-3">
                       <button
                         onClick={() => setSettingsView('privacy')}
-                        className="bg-white/5 hover:bg-cyan-500/10 border-2 border-white/10 hover:border-cyan-500/30 rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:-translate-y-1 group"
+                        className="bg-black/20 hover:bg-cyan-900/10 border border-white/10 hover:border-cyan-500/50 p-4 transition-all group relative overflow-hidden"
                       >
-                        <span className="text-2xl group-hover:scale-110 transition-transform">🔒</span>
-                        <span className="text-xs font-bold text-white group-hover:text-cyan-400">{t('settings.main.btn_privacy')}</span>
+                        <div className="absolute top-0 right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="w-2 h-2 bg-cyan-500 rounded-full shadow-[0_0_5px_cyan]"></div>
+                        </div>
+                        <span className="block text-xl mb-2 grayscale group-hover:grayscale-0 transition-all">🔒</span>
+                        <span className="text-[10px] font-bold text-white/70 group-hover:text-cyan-400 tracking-wider block">{t('settings.main.btn_privacy')}</span>
                       </button>
+
                       <button
                         onClick={() => setSettingsView('terms')}
-                        className="bg-white/5 hover:bg-purple-500/10 border-2 border-white/10 hover:border-purple-500/30 rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:-translate-y-1 group"
+                        className="bg-black/20 hover:bg-purple-900/10 border border-white/10 hover:border-purple-500/50 p-4 transition-all group relative overflow-hidden"
                       >
-                        <span className="text-2xl group-hover:scale-110 transition-transform">📄</span>
-                        <span className="text-xs font-bold text-white group-hover:text-purple-400">{t('settings.main.btn_terms')}</span>
+                        <div className="absolute top-0 right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="w-2 h-2 bg-purple-500 rounded-full shadow-[0_0_5px_purple]"></div>
+                        </div>
+                        <span className="block text-xl mb-2 grayscale group-hover:grayscale-0 transition-all">📄</span>
+                        <span className="text-[10px] font-bold text-white/70 group-hover:text-purple-400 tracking-wider block">{t('settings.main.btn_terms')}</span>
                       </button>
+
                       <button
                         onClick={() => setSettingsView('credits')}
-                        className="bg-white/5 hover:bg-green-500/10 border-2 border-white/10 hover:border-green-500/30 rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:-translate-y-1 group"
+                        className="bg-black/20 hover:bg-green-900/10 border border-white/10 hover:border-green-500/50 p-4 transition-all group relative overflow-hidden"
                       >
-                        <span className="text-2xl group-hover:scale-110 transition-transform">⚡</span>
-                        <span className="text-xs font-bold text-white group-hover:text-green-400">{t('settings.main.btn_credits')}</span>
+                        <div className="absolute top-0 right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_5px_green]"></div>
+                        </div>
+                        <span className="block text-xl mb-2 grayscale group-hover:grayscale-0 transition-all">⚡</span>
+                        <span className="text-[10px] font-bold text-white/70 group-hover:text-green-400 tracking-wider block">{t('settings.main.btn_credits')}</span>
                       </button>
                     </div>
                   </div>
@@ -632,7 +662,7 @@ function App() {
               {/* --- PRIVACY VIEW --- */}
               {settingsView === 'privacy' && (
                 <div className="space-y-4 animate-in slide-in-from-right duration-300">
-                  <div className="text-right text-[10px] text-white/60 italic mr-2">{t('settings.privacy.last_updated')}</div>
+                  <div className="text-right text-[10px] text-white/80 italic mr-2">{t('settings.privacy.last_updated')}</div>
                   <div className="space-y-4 text-xs text-white leading-relaxed text-justify p-4 bg-white/5 rounded-xl max-h-[400px] overflow-y-auto custom-scrollbar">
                     {[1, 2, 3, 4, 5].map(i => (
                       <div key={i}>
@@ -649,7 +679,7 @@ function App() {
               {/* --- TERMS VIEW --- */}
               {settingsView === 'terms' && (
                 <div className="space-y-4 animate-in slide-in-from-right duration-300">
-                  <div className="text-right text-[10px] text-white/60 italic mr-2">{t('settings.terms.last_updated')}</div>
+                  <div className="text-right text-[10px] text-white/80 italic mr-2">{t('settings.terms.last_updated')}</div>
                   <div className="space-y-4 text-xs text-white leading-relaxed text-justify p-4 bg-white/5 rounded-xl max-h-[400px] overflow-y-auto custom-scrollbar">
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => (
                       <div key={i}>
@@ -673,7 +703,7 @@ function App() {
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-white/5 p-4 rounded-xl border border-white/5">
+                    <div className="bg-white/5 p-4 rounded-xl border border-white/20">
                       <h4 className="text-xs font-bold text-white mb-2">{t('settings.credits.frontend')}</h4>
                       <ul className="text-[10px] text-white/90 space-y-1">
                         <li>• React + TypeScript</li>
@@ -681,7 +711,7 @@ function App() {
                         <li>• Vite</li>
                       </ul>
                     </div>
-                    <div className="bg-white/5 p-4 rounded-xl border border-white/5">
+                    <div className="bg-white/5 p-4 rounded-xl border border-white/20">
                       <h4 className="text-xs font-bold text-white mb-2">{t('settings.credits.backend')}</h4>
                       <ul className="text-[10px] text-white/90 space-y-1">
                         <li>• Electron</li>
@@ -692,13 +722,13 @@ function App() {
                   </div>
 
                   {/* Strategic Collaborator */}
-                  <div className="mt-4 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-white/5 p-3 rounded-xl flex items-center justify-between">
-                    <span className="text-[10px] text-white/60 font-bold uppercase tracking-wider">{t('settings.credits.collaborator')}</span>
+                  <div className="mt-4 bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-white/20 p-3 rounded-xl flex items-center justify-between">
+                    <span className="text-[10px] text-white/80 font-bold uppercase tracking-wider">{t('settings.credits.collaborator')}</span>
                     <span className="text-xs font-bold text-white bg-white/10 px-3 py-1 rounded-full shadow-inner">{t('settings.credits.collaborator_name')}</span>
                   </div>
 
-                  <div className="text-center mt-8 p-4 border-t border-white/5">
-                    <p className="text-xs text-white/60 font-bold mb-1">{t('settings.credits.dev_by')}</p>
+                  <div className="text-center mt-8 p-4 border-t border-white/20">
+                    <p className="text-xs text-white/80 font-bold mb-1">{t('settings.credits.dev_by')}</p>
                     <p className="text-sm text-cyan-400 font-bold tracking-widest">NauticGames™</p>
                   </div>
                 </div>
@@ -708,8 +738,8 @@ function App() {
 
             {/* Modal Footer (Copyright) - Fixed at bottom */}
             {settingsView === 'main' && (
-              <div className="p-4 border-t border-white/5 bg-black/20 text-center flex-none">
-                <p className="text-[10px] text-white/50">{t('app.footer.copyright')}</p>
+              <div className="p-4 border-t border-white/20 bg-black/20 text-center flex-none">
+                <p className="text-[10px] text-white/70">{t('app.footer.copyright')}</p>
               </div>
             )}
 
@@ -725,13 +755,13 @@ function App() {
           {/* Tabs */}
           {/* Tabs - Redesigned: Segmented Glass Switch (Full Width) */}
           <div className="flex-none flex mb-6">
-            <div className="flex-1 flex p-1 bg-black/40 backdrop-blur-md rounded-full border border-white/10 relative">
+            <div className="flex-1 flex p-1 bg-black/40 backdrop-blur-md rounded-full border border-white/30 relative">
               {/* Tab 1: Send */}
               <button
                 onClick={() => setActiveTab('send')}
                 className={`flex-1 py-2 px-6 rounded-full text-sm font-bold transition-all duration-300 relative z-10 flex items-center justify-center gap-2 ${activeTab === 'send'
                   ? 'text-black shadow-[0_0_20px_rgba(0,240,255,0.4)]'
-                  : 'text-white/50 hover:text-white'
+                  : 'text-white/70 hover:text-white'
                   }`}
               >
                 <span>📤</span> {t('tabs.send')}
@@ -742,7 +772,7 @@ function App() {
                 onClick={() => setActiveTab('receive')}
                 className={`flex-1 py-2 px-6 rounded-full text-sm font-bold transition-all duration-300 relative z-10 flex items-center justify-center gap-2 ${activeTab === 'receive'
                   ? 'text-black shadow-[0_0_20px_rgba(255,0,255,0.4)]'
-                  : 'text-white/50 hover:text-white'
+                  : 'text-white/70 hover:text-white'
                   }`}
               >
                 <span>📥</span> {t('tabs.receive')}
@@ -758,7 +788,7 @@ function App() {
           </div>
 
           {/* Action Area CONTAINER */}
-          <div className="flex-1 relative mb-2 overflow-hidden rounded-3xl bg-surface shadow-[4px_4px_0px_rgba(0,0,0,0.2)] border-2 border-white/10 min-h-0">
+          <div className="flex-1 relative mb-2 overflow-hidden rounded-3xl bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-purple-500/10 backdrop-blur-xl shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] border border-white/20 min-h-0">
 
             {/* --- SEND VIEW --- */}
             <div className={`absolute inset-0 p-1 transition-all duration-500 ease-out flex flex-col ${activeTab === 'send' ? 'opacity-100 translate-x-0 z-10' : 'opacity-0 -translate-x-10 pointer-events-none z-0'}`}>
@@ -773,21 +803,29 @@ function App() {
               {/* --- STEALTH / NORMAL MODE DROPZONE --- */}
               {(!hasCode || selectedContact) && !isLoading ? (
                 <div
-                  className={`flex-1 flex flex-col items-center justify-center border-2 border-dashed rounded-2xl transition-all duration-300 p-2 cursor-pointer relative ${isHovering
-                    ? 'border-cyan-500/80 shadow-[inset_0_0_20px_rgba(0,0,0,0.2)] bg-black/10'
-                    : (selectedContact ? 'border-cyan-500/30 bg-cyan-900/10' : 'border-white/30 hover:border-white/50 hover:bg-white/5')
+                  className={`flex-1 flex flex-col items-center justify-center relative transition-all duration-300 p-2 cursor-pointer group overflow-hidden ${isHovering ? 'bg-cyan-500/5' : 'hover:bg-white/5'
                     } ${isTransferActive ? 'opacity-50 pointer-events-none grayscale' : ''}`}
                   onDragOver={(e) => { e.preventDefault(); setIsHovering(true); }}
                   onDragLeave={() => setIsHovering(false)}
                   onDrop={handleDrop}
                   onClick={() => fileInputRef.current?.click()}
                 >
+                  {/* --- TACTICAL CORNERS (Targeting System) --- */}
+                  {/* Top Left */}
+                  <div className={`absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 rounded-tl-lg transition-all duration-500 ${isHovering || selectedContact ? 'border-cyan-500 w-16 h-16 shadow-[0_0_15px_rgba(6,182,212,0.3)]' : 'border-white/20'}`}></div>
+                  {/* Top Right */}
+                  <div className={`absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 rounded-tr-lg transition-all duration-500 ${isHovering || selectedContact ? 'border-cyan-500 w-16 h-16 shadow-[0_0_15px_rgba(6,182,212,0.3)]' : 'border-white/20'}`}></div>
+                  {/* Bottom Left */}
+                  <div className={`absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 rounded-bl-lg transition-all duration-500 ${isHovering || selectedContact ? 'border-cyan-500 w-16 h-16 shadow-[0_0_15px_rgba(6,182,212,0.3)]' : 'border-white/20'}`}></div>
+                  {/* Bottom Right */}
+                  <div className={`absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 rounded-br-lg transition-all duration-500 ${isHovering || selectedContact ? 'border-cyan-500 w-16 h-16 shadow-[0_0_15px_rgba(6,182,212,0.3)]' : 'border-white/20'}`}></div>
+
                   {/* Stealth Indicator - Compact & Fluid */}
                   {selectedContact && (
-                    <div className="w-full max-w-[200px] mb-1 flex justify-center animate-in slide-in-from-top fade-in duration-500">
-                      <div className="bg-cyan-500/10 border border-cyan-500/20 px-3 py-0.5 rounded-full flex items-center gap-2 backdrop-blur-md shadow-lg">
-                        <div className={`w-1.5 h-1.5 rounded-full ${selectedContact.avatarColor} animate-pulse`}></div>
-                        <span className="text-[9px] font-bold text-cyan-400 max-w-[120px] truncate">{t('send.linked', { name: selectedContact.name })}</span>
+                    <div className="w-full max-w-[200px] mb-4 flex justify-center animate-in slide-in-from-top fade-in duration-500 z-10">
+                      <div className="bg-cyan-500/10 border border-cyan-500/20 px-4 py-1 rounded-full flex items-center gap-3 backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.2)]">
+                        <div className={`w-2 h-2 rounded-full ${selectedContact.avatarColor} animate-pulse shadow-[0_0_10px_currentColor]`}></div>
+                        <span className="text-[10px] font-bold text-cyan-400 tracking-widest uppercase">{t('send.linked', { name: selectedContact.name })}</span>
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -795,44 +833,75 @@ function App() {
                             setGeneratedCode('');
                             setInputCode('');
                           }}
-                          className="ml-1 text-cyan-500/50 hover:text-white flex items-center justify-center w-4 h-4 rounded-full hover:bg-white/10"
+                          className="ml-1 text-cyan-500/50 hover:text-white flex items-center justify-center w-4 h-4 rounded-full hover:bg-white/10 transition-colors"
                           title={t('send.disconnect')}
                         >✕</button>
                       </div>
                     </div>
                   )}
 
-                  <div className="text-center pointer-events-none transition-all duration-300 flex flex-col items-center justify-center">
-                    <div className={`transition-transform duration-500 ${isHovering ? 'scale-125 rotate-12' : 'scale-100'} ${selectedContact ? 'text-3xl mb-1' : 'text-5xl mb-3'}`}>
-                      {selectedContact ? '🤝' : (isHovering ? '🛰️' : '🛸')}
+                  <div className="text-center pointer-events-none transition-all duration-500 flex flex-col items-center justify-center z-10">
+                    <div className={`transition-all duration-500 relative ${isHovering ? 'scale-110 drop-shadow-[0_0_25px_rgba(6,182,212,0.6)]' : 'scale-100 opacity-80'}`}>
+                      <div className="text-6xl mb-4 filter drop-shadow-lg">{selectedContact ? '🤝' : (isHovering ? '📂' : '📡')}</div>
+                      {/* Pulse Ring */}
+                      {!selectedContact && !isHovering && (
+                        <div className="absolute inset-0 rounded-full border border-white/5 animate-ping opacity-20"></div>
+                      )}
                     </div>
-                    <p className="text-white/90 font-medium text-base mb-0.5 leading-tight">{selectedContact ? t('send.drop_text_linked', { name: selectedContact.name }) : t('send.drop_text')}</p>
-                    <p className="text-white/60 text-[10px]">{selectedContact ? t('send.drop_subtext_linked') : t('send.drop_subtext')}</p>
+
+                    <h3 className={`text-lg font-bold tracking-widest uppercase mb-1 transition-colors duration-300 ${isHovering ? 'text-cyan-400' : 'text-white/70'}`}>
+                      {selectedContact ? 'SECURE LINK ESTABLISHED' : (isHovering ? 'READY FOR UPLOAD' : 'AWAITING PAYLOAD')}
+                    </h3>
+
+                    <p className="text-[10px] text-white/40 tracking-[0.2em] uppercase">
+                      {selectedContact ? t('send.drop_subtext_linked') : t('send.drop_subtext')}
+                    </p>
                   </div>
                 </div>
               ) : isLoading ? (
-                <div className="flex-1 flex flex-col items-center justify-center">
-                  <div className="relative">
-                    <div className="text-5xl mb-3 animate-spin grayscale">💠</div>
-                    <div className="absolute inset-0 flex items-center justify-center text-5xl animate-pulse">💠</div>
+                <div className="flex-1 flex flex-col items-center justify-center relative">
+                  {/* Tactical Spinner / Processor */}
+                  <div className="relative w-24 h-24 flex items-center justify-center">
+                    <div className="absolute inset-0 border-t-2 border-b-2 border-cyan-500/50 rounded-full animate-spin"></div>
+                    <div className="absolute inset-2 border-l-2 border-r-2 border-purple-500/50 rounded-full animate-spin-slow reverse"></div>
+                    <div className="text-3xl animate-pulse grayscale">💠</div>
                   </div>
-                  <p className="text-cyan-400 text-sm font-semibold animate-pulse tracking-wider">{t('send.loading')}</p>
+
+                  <div className="mt-4 flex flex-col items-center gap-1">
+                    <p className="text-cyan-400 text-xs font-bold tracking-[0.2em] animate-pulse">ENCRYPTING PAYLOAD</p>
+                    <div className="w-32 h-0.5 bg-white/10 overflow-hidden rounded-full">
+                      <div className="h-full bg-cyan-500 animate-[progress-indeterminate_1.5s_infinite_linear]"></div>
+                    </div>
+                  </div>
                 </div>
               ) : (
-                // SHOW GENERATED CODE
-                <div className="flex-1 flex flex-col items-center justify-center text-center space-y-4 w-full max-w-lg animate-in fade-in zoom-in duration-500 p-2">
-                  <p className="text-white/70 uppercase tracking-[0.3em] text-[9px] font-bold">{t('send.channel_id')}</p>
-                  <div className="relative group w-full max-w-sm mx-auto">
-                    <div className="text-xl md:text-2xl font-mono text-cyan-400 font-bold tracking-wider select-text px-4 py-3 bg-black/40 rounded-xl border border-cyan-500/30 shadow-[0_0_20px_rgba(0,240,255,0.1)] break-all border-dashed">
-                      {generatedCode}
+                // SHOW GENERATED CODE - TACTICAL HUD STYLE
+                <div className="flex-1 flex flex-col items-center justify-center text-center space-y-6 w-full max-w-lg animate-in fade-in zoom-in duration-500 p-2 relative mx-auto">
+
+                  <div className="flex flex-col items-center gap-2">
+                    <p className="text-white/40 uppercase tracking-[0.4em] text-[8px] font-bold">{t('send.channel_id')}</p>
+
+                    {/* HUD Code container */}
+                    <div className="relative group p-6">
+                      {/* Tactical Corners */}
+                      <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-cyan-500/50"></div>
+                      <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-cyan-500/50"></div>
+                      <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-cyan-500/50"></div>
+                      <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-cyan-500/50"></div>
+
+                      <div className="text-3xl md:text-4xl font-mono text-cyan-400 font-bold tracking-widest select-text drop-shadow-[0_0_10px_rgba(6,182,212,0.5)]">
+                        {generatedCode}
+                      </div>
+
+                      {/* Floating Copy Action */}
+                      <button
+                        onClick={(e) => { e.stopPropagation(); copyToClipboard(generatedCode); }}
+                        className="absolute -right-6 top-1/2 -translate-y-1/2 p-2 text-cyan-500/50 hover:text-cyan-400 hover:bg-cyan-500/10 rounded-full transition-all"
+                        title={t('send.copy_tooltip')}
+                      >
+                        {copySuccess ? '✓' : '📋'}
+                      </button>
                     </div>
-                    <button
-                      onClick={(e) => { e.stopPropagation(); copyToClipboard(generatedCode); }}
-                      className="absolute -right-2 -top-2 p-2 rounded-full bg-cyan-500 text-black shadow-lg hover:scale-110 transition-transform z-20"
-                      title={t('send.copy_tooltip')}
-                    >
-                      {copySuccess ? t('send.copy_success') : '📋'}
-                    </button>
                   </div>
 
                   {/* Social Share Buttons */}
@@ -875,28 +944,48 @@ function App() {
                   </div>
                   <div className="bg-cyan-900/10 p-3 rounded-lg border border-cyan-500/10">
                     <p className="text-cyan-200/60 text-[10px] animate-pulse">{t('send.waiting')}</p>
-                    <button onClick={handleCancel} className="mt-2 text-[10px] text-white/60 hover:text-white underline">{t('send.cancel')}</button>
+                    <button onClick={handleCancel} className="mt-2 text-[10px] text-white/80 hover:text-white underline">{t('send.cancel')}</button>
                   </div>
                 </div>
               )}
             </div>
 
             {/* --- RECEIVE VIEW --- */}
+            {/* --- RECEIVE VIEW --- */}
             <div className={`absolute inset-0 flex flex-col items-center justify-center p-4 transition-all duration-500 ease-out ${activeTab === 'receive' ? 'opacity-100 translate-x-0 z-10' : 'opacity-0 translate-x-10 pointer-events-none z-0'}`}>
-              <div className="w-full max-w-md flex flex-col gap-3 justify-center h-full max-h-[300px]">
-                <label className="block text-center text-[10px] uppercase tracking-[0.2em] text-white/60 font-bold shrink-0">{t('receive.target_coordinates')}</label>
-                <div className="relative shrink-0">
+              <div className="w-full max-w-sm flex flex-col gap-6 justify-center h-full max-h-[400px]">
+
+                {/* Header */}
+                <div className="text-center space-y-2 mb-4">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-2xl mb-2 animate-pulse">
+                    📡
+                  </div>
+                  <h3 className="text-xl font-bold text-white tracking-widest uppercase">INPUT COORDINATES</h3>
+                  <p className="text-[10px] text-white/40 tracking-[0.2em] uppercase">{t('receive.target_coordinates')}</p>
+                </div>
+
+                <div className="relative group">
+                  {/* Tactical Corners for Input */}
+                  <div className={`absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 transition-all duration-300 ${inputCode ? 'border-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.5)]' : 'border-white/50 group-hover:border-cyan-500/50'}`}></div>
+                  <div className={`absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 transition-all duration-300 ${inputCode ? 'border-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.5)]' : 'border-white/50 group-hover:border-cyan-500/50'}`}></div>
+                  <div className={`absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 transition-all duration-300 ${inputCode ? 'border-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.5)]' : 'border-white/50 group-hover:border-cyan-500/50'}`}></div>
+                  <div className={`absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 transition-all duration-300 ${inputCode ? 'border-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.5)]' : 'border-white/50 group-hover:border-cyan-500/50'}`}></div>
+
                   <input
                     type="text"
                     value={inputCode}
                     onChange={(e) => setInputCode(e.target.value)}
                     placeholder={t('receive.placeholder')}
                     disabled={!!selectedContact}
-                    className={`w-full h-12 bg-black/20 backdrop-blur-xl border border-white/30 focus:border-purple-500/50 text-center text-lg font-mono rounded-xl outline-none transition-all placeholder:text-white/5 shadow-inner focus:shadow-[0_0_30px_rgba(168,85,247,0.2)] ${selectedContact ? 'text-green-400 border-green-500/30' : ''}`}
+                    className={`w-full h-14 bg-black/40 backdrop-blur-md border-0 text-center text-2xl font-mono tracking-widest outline-none transition-all placeholder:text-white/10 placeholder:text-sm ${selectedContact ? 'text-green-400' : 'text-cyan-400'}`}
+                    style={{ clipPath: 'polygon(5% 0, 95% 0, 100% 20%, 100% 80%, 95% 100%, 5% 100%, 0% 80%, 0% 20%)' }}
                   />
+
                   {selectedContact && (
-                    <div className="absolute inset-x-0 -bottom-5 text-center">
-                      <span className="text-[9px] text-green-400 uppercase tracking-widest bg-green-900/20 px-2 py-0.5 rounded border border-green-500/20">{t('receive.linked_label', { name: selectedContact.name })}</span>
+                    <div className="absolute inset-x-0 -bottom-8 text-center animate-in slide-in-from-bottom-2 fade-in">
+                      <span className="text-[9px] text-green-400 uppercase tracking-widest bg-green-900/20 px-3 py-1 rounded border border-green-500/20 shadow-[0_0_10px_rgba(34,197,94,0.2)]">
+                        ● {t('receive.linked_label', { name: selectedContact.name })}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -904,9 +993,22 @@ function App() {
                 <button
                   onClick={handleReceive}
                   disabled={!inputCode || isTransferActive}
-                  className="w-full shrink-0 h-12 mt-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-sm rounded-xl hover:brightness-110 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-purple-500/20 active:scale-[0.98] flex items-center justify-center"
+                  className="w-full h-12 mt-4 relative overflow-hidden group disabled:opacity-80 disabled:cursor-not-allowed"
                 >
-                  {t('receive.initiate')}
+                  <div className="absolute inset-0 bg-cyan-500/10 group-hover:bg-cyan-500/20 transition-colors border border-cyan-500/30 group-hover:border-cyan-500/60 skew-x-[-10deg]"></div>
+                  <div className="relative flex items-center justify-center gap-2 text-cyan-400 font-bold tracking-[0.2em] text-xs uppercase group-hover:text-cyan-300 transition-colors">
+                    {isTransferActive ? (
+                      <div className="flex items-center gap-3 animate-pulse">
+                        <div className="w-4 h-4 border-2 border-cyan-400/30 border-t-cyan-400 rounded-full animate-spin"></div>
+                        <span>INITIALIZING...</span>
+                      </div>
+                    ) : (
+                      <>
+                        <span>{t('receive.initiate')}</span>
+                        <span className="text-lg">➔</span>
+                      </>
+                    )}
+                  </div>
                 </button>
               </div>
             </div>
@@ -915,9 +1017,9 @@ function App() {
 
           {/* --- TRUSTED LINKS (AVATAR BAR) --- */}
           <div className={`flex-none mt-2 transition-all duration-500 ${contacts.length > 0 ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
-            <h3 className="text-[10px] uppercase tracking-[0.2em] text-white/60 font-bold mb-2 flex items-center justify-between">
+            <h3 className="text-[10px] uppercase tracking-[0.2em] text-white/80 font-bold mb-2 flex items-center justify-between">
               <span>{t('contacts.title')}</span>
-              <span className="text-[9px] bg-white/5 px-2 py-0.5 rounded text-white/50">{t('contacts.active_count', { count: contacts.length })}</span>
+              <span className="text-[9px] bg-white/5 px-2 py-0.5 rounded text-white/70">{t('contacts.active_count', { count: contacts.length })}</span>
             </h3>
             <div className="flex items-center gap-4 overflow-x-auto pt-3 pb-4 custom-scrollbar">
               {contacts.map(contact => {
@@ -941,7 +1043,7 @@ function App() {
                     >
                       <div className={`w-12 h-12 rounded-full ${contact.avatarColor} flex items-center justify-center text-lg font-bold text-white shadow-lg border-2 transition-all duration-300 ${isSelected
                         ? 'border-cyan-400 scale-110 shadow-[0_0_15px_rgba(34,211,238,0.5)]'
-                        : 'border-white/10 hover:border-white/30 hover:scale-105'
+                        : 'border-white/30 hover:border-white/30 hover:scale-105'
                         }`}>
                         {contact.name.substring(0, 2).toUpperCase()}
                       </div>
@@ -971,117 +1073,107 @@ function App() {
           </div>
 
 
-        </div>
+        </div >
 
         {/* Right Column: Dashboard (33%) */}
         {/* Changed: Container is now transparent and handles spacing between child cards */}
         <div className="col-span-4 flex flex-col min-h-0 gap-4">
 
-          {/* Card 1: Live Transfer */}
-          <div className="bg-surface rounded-3xl border-2 border-white/10 p-4 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
-            <h3 className="text-xs uppercase tracking-widest text-white/70 font-bold mb-3 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className={`w-1.5 h-1.5 rounded-full ${transferDetails.stage === 'idle' ? 'bg-white/20' : transferDetails.stage === 'error' ? 'bg-red-500' : 'bg-cyan-500 animate-pulse'}`}></span>
+          {/* Card 1: Live Status */}
+          <div className="bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-purple-500/10 backdrop-blur-xl rounded-2xl border border-white/10 p-5 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] animate-breathing relative overflow-hidden group">
+            {/* Tactical Grid Background (Subtle) */}
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
+
+            <div className="flex justify-between items-center mb-4 relative z-10 border-b border-white/10 pb-2">
+              <h3 className="text-[10px] uppercase tracking-[0.2em] text-white/60 font-bold flex items-center gap-2">
+                <span className={`w-2 h-2 rounded-sm ${transferDetails.stage === 'idle' ? 'bg-white/20' : transferDetails.stage === 'error' ? 'bg-red-500 shadow-[0_0_10px_red]' : 'bg-cyan-500 animate-pulse shadow-[0_0_10px_cyan]'}`}></span>
                 {t('dashboard.live_status')}
-              </div>
+              </h3>
+
               <div className="flex items-center gap-2">
                 {/* Force Reset Button */}
                 <button
                   onClick={handleCancel}
-                  className="w-6 h-6 flex items-center justify-center rounded bg-white/5 border border-white/10 text-white/70 hover:text-red-400 hover:bg-red-500/10 hover:border-red-500/30 transition-all"
+                  className="w-6 h-6 flex items-center justify-center rounded border border-white/10 text-white/40 hover:text-red-400 hover:border-red-500/50 hover:bg-red-500/10 transition-all active:scale-95"
                   title="Refresh Live Status"
                 >
                   ↻
                 </button>
                 <button
                   onClick={() => setShowConsole(!showConsole)}
-                  className={`text-[10px] px-2 py-0.5 rounded border transition-all ${showConsole ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400' : 'bg-white/5 border-white/10 text-white/70 hover:text-white'}`}
+                  className={`text-[8px] px-2 py-0.5 rounded border uppercase tracking-wider transition-all ${showConsole ? 'bg-cyan-500/10 border-cyan-500 text-cyan-400' : 'bg-black/40 border-white/10 text-white/50 hover:text-white'}`}
                   title="Toggle Console View"
                 >
                   {showConsole ? '>_ CONSOLE' : '👁️ PRETTY'}
                 </button>
               </div>
-            </h3>
+            </div>
 
-            <div className="bg-black/20 rounded-xl p-4 border-2 border-white/5 min-h-[200px] flex flex-col relative overflow-hidden shadow-inner">
+            <div className="relative z-10 min-h-[180px] flex flex-col">
 
               {/* --- PRETTY VIEW (Default) --- */}
               {!showConsole && (
-                <div className="flex-1 flex flex-col justify-between animate-in fade-in duration-300">
+                <div className="flex-1 flex flex-col justify-between animate-in fade-in duration-300 gap-4">
 
-                  {/* Status Steps */}
-                  <div className="flex flex-col gap-4">
-                    {/* Step 1: Connection */}
-                    <div className={`flex items-center gap-3 transition-opacity ${transferDetails.stage !== 'idle' ? 'opacity-100' : 'opacity-30'}`}>
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center border ${['connecting', 'transferring', 'finished'].includes(transferDetails.stage) ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400' : 'bg-white/5 border-white/10 text-white/60'}`}>
-                        1
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="text-xs font-bold text-white/90">{transferDetails.stage === 'idle' ? t('status.step1_idle') : t('status.connecting')}</span>
-                        {/* Hashing UI or Subtitle */}
-                        {hashingPercent > 0 && hashingPercent < 100 && transferDetails.stage === 'connecting' ? (
-                          <div className="w-24 flex flex-col gap-1 mt-1">
-                            <div className="flex justify-between text-[8px] text-cyan-300 font-mono">
-                              <span>HASHING...</span>
-                              <span>{hashingPercent}%</span>
-                            </div>
-                            <div className="h-0.5 bg-white/10 rounded-full overflow-hidden">
-                              <div
-                                className="h-full bg-cyan-500 transition-all duration-100"
-                                style={{ width: `${hashingPercent}%` }}
-                              />
-                            </div>
-                          </div>
-                        ) : (
-                          <span className="text-[10px] text-white/70">{transferDetails.stage === 'idle' ? t('dashboard.system_idle') : (transferDetails.stage === 'connecting' ? 'Handshake...' : 'Secure Channel')}</span>
-                        )}
-                      </div>
+                  {/* Step 1: Connection */}
+                  <div className={`flex items-start gap-4 transition-all duration-300 ${transferDetails.stage !== 'idle' ? 'opacity-100 translate-x-0' : 'opacity-40 translate-x-[-5px]'}`}>
+                    <div className={`w-6 h-6 flex-none flex items-center justify-center border font-mono text-[10px] font-bold mt-0.5 rounded-sm ${['connecting', 'transferring', 'finished'].includes(transferDetails.stage) ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.3)]' : 'bg-black/30 border-white/10 text-white/30'}`}>
+                      01
                     </div>
-
-                    {/* Step 2: Transfer */}
-                    <div className={`flex items-center gap-3 transition-opacity ${['transferring', 'finished'].includes(transferDetails.stage) ? 'opacity-100' : 'opacity-30'}`}>
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center border ${['transferring', 'finished'].includes(transferDetails.stage) ? 'bg-purple-500/20 border-purple-500 text-purple-400' : 'bg-white/5 border-white/10 text-white/60'}`}>
-                        2
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex justify-between items-end mb-1">
-                          <span className="text-xs font-bold text-white/90">Transferring</span>
-                          <span className="text-[10px] font-mono text-cyan-400">{transferDetails.speed || '0 MB/s'}</span>
+                    <div className="flex-1">
+                      <span className="text-xs font-bold text-white tracking-wide block mb-1">{transferDetails.stage === 'idle' ? t('status.step1_idle') : t('status.connecting')}</span>
+                      {/* Hashing UI */}
+                      {hashingPercent > 0 && hashingPercent < 100 && transferDetails.stage === 'connecting' ? (
+                        <div className="w-full max-w-[150px] bg-black/40 h-1 mt-1 overflow-hidden relative">
+                          <div className="absolute inset-0 bg-cyan-500/20"></div>
+                          <div className="h-full bg-cyan-400 w-full animate-[progress-indeterminate_1s_infinite_linear]"></div>
+                          <div className="absolute top-[-15px] right-0 text-[8px] font-mono text-cyan-400">{hashingPercent}%</div>
                         </div>
-                        {/* Visual Progress Bar */}
-                        <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-cyan-500 shadow-[0_0_10px_rgba(0,240,255,0.5)] transition-all duration-300 ease-out"
-                            style={{ width: `${transferDetails.percent}%` }}
-                          />
-                        </div>
-
-                        {/* Transfer Stats */}
-                        <div className="flex justify-between items-center text-[10px] text-white/80 font-mono">
-                          <span>{transferDetails.sizeInfo || '0.0 / 0.0 MB'}</span>
-                          <span className="text-cyan-400 font-bold">{transferDetails.percent}%</span>
-                        </div>
-                      </div>
+                      ) : (
+                        <span className="text-[9px] text-white/40 uppercase tracking-widest">{transferDetails.stage === 'idle' ? t('dashboard.system_idle') : (transferDetails.stage === 'connecting' ? 'Handshake Protocol...' : 'Secure Channel Established')}</span>
+                      )}
                     </div>
+                  </div>
 
-                    {/* Step 3: Finished */}
-                    <div className={`flex items-center gap-3 transition-opacity ${transferDetails.stage === 'finished' ? 'opacity-100' : 'opacity-30'}`}>
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center border ${transferDetails.stage === 'finished' ? 'bg-green-500/20 border-green-500 text-green-400' : 'bg-white/5 border-white/10 text-white/60'}`}>
-                        3
+                  {/* Step 2: Transfer */}
+                  <div className={`flex items-start gap-4 transition-all duration-300 ${['transferring', 'finished'].includes(transferDetails.stage) ? 'opacity-100 translate-x-0' : 'opacity-40 translate-x-[-5px]'}`}>
+                    <div className={`w-6 h-6 flex-none flex items-center justify-center border font-mono text-[10px] font-bold mt-0.5 rounded-sm ${['transferring', 'finished'].includes(transferDetails.stage) ? 'bg-purple-500/20 border-purple-500 text-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.3)]' : 'bg-black/30 border-white/10 text-white/30'}`}>
+                      02
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex justify-between items-end mb-1">
+                        <span className="text-xs font-bold text-white tracking-wide">DATA TRANSFER</span>
+                        <span className="text-[9px] font-mono text-cyan-400 bg-cyan-900/20 px-1 border border-cyan-500/30 rounded-sm">{transferDetails.speed || '0 KB/s'}</span>
                       </div>
-                      <div className="flex flex-col">
-                        <span className="text-xs font-bold text-white/90">Complete</span>
-                        <span className="text-[10px] text-white/70">Files saved to Downloads</span>
+
+                      {/* Tactical Progress Bar */}
+                      <div className="h-2 w-full bg-black/50 border border-white/10 relative overflow-hidden group/bar">
+                        {/* Grid lines on bar */}
+                        <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_2px,rgba(0,0,0,0.8)_2px)] bg-[size:10px_100%] z-10 pointer-events-none opacity-50"></div>
+                        <div
+                          className="h-full bg-cyan-500 shadow-[0_0_15px_cyan] transition-all duration-300 ease-out relative z-0"
+                          style={{ width: `${transferDetails.percent}%` }}
+                        />
+                      </div>
+
+                      <div className="flex justify-between items-center text-[8px] text-white/50 font-mono mt-1">
+                        <span>{transferDetails.sizeInfo || '0.0 / 0.0 MB'}</span>
+                        <span className="text-cyan-400 font-bold">{transferDetails.percent}%</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Large Percentage Overlay */}
-                  {transferDetails.stage === 'transferring' && (
-                    <div className="absolute bottom-4 right-4 text-4xl font-black text-white/5 tabular-nums">
-                      {transferDetails.percent}%
+                  {/* Step 3: Finished */}
+                  <div className={`flex items-start gap-4 transition-all duration-300 ${transferDetails.stage === 'finished' ? 'opacity-100 translate-x-0' : 'opacity-40 translate-x-[-5px]'}`}>
+                    <div className={`w-6 h-6 flex-none flex items-center justify-center border font-mono text-[10px] font-bold mt-0.5 rounded-sm ${transferDetails.stage === 'finished' ? 'bg-green-500/20 border-green-500 text-green-400 shadow-[0_0_10px_rgba(34,197,94,0.3)]' : 'bg-black/30 border-white/10 text-white/30'}`}>
+                      03
                     </div>
-                  )}
+                    <div className="flex flex-col">
+                      <span className="text-xs font-bold text-white tracking-wide">COMPLETED</span>
+                      <span className="text-[9px] text-white/40 uppercase tracking-widest">Payload Securely Stored</span>
+                    </div>
+                  </div>
+
                 </div>
               )}
 
@@ -1089,14 +1181,14 @@ function App() {
               {showConsole && (
                 <div className="flex-1 overflow-y-auto max-h-[150px] custom-scrollbar font-mono text-[10px] space-y-1 animate-in fade-in zoom-in-95 duration-200">
                   {log.length === 0 ? (
-                    <div className="h-full flex items-center justify-center text-white/50 italic">
+                    <div className="h-full flex items-center justify-center text-white/70 italic">
                       {t('dashboard.system_idle')}
                     </div>
                   ) : (
                     log.map((l, i) => {
                       const isError = l.includes('!!!') || l.toLowerCase().includes('error') || l.includes('❌');
                       return (
-                        <div key={i} className={`break-all pl-2 border-l-2 ${isError ? 'text-red-400 border-red-500/50' : 'text-white/80 border-white/10'}`}>
+                        <div key={i} className={`break-all pl-2 border-l-2 ${isError ? 'text-red-400 border-red-500/50' : 'text-white/80 border-white/30'}`}>
                           {l.replace('[OUT]', '').replace('[ERR]', '')}
                         </div>
                       );
@@ -1109,10 +1201,10 @@ function App() {
           </div>
 
           {/* Card 2: History */}
-          <div className="flex-1 flex flex-col min-h-0 bg-surface rounded-3xl border-2 border-white/10 p-4 shadow-[4px_4px_0px_rgba(0,0,0,0.2)]">
+          <div className="flex-1 flex flex-col min-h-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-purple-500/10 backdrop-blur-xl rounded-2xl border border-white/10 p-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] animate-breathing">
             <div className="flex justify-between items-center mb-3">
-              <h3 className="text-xs uppercase tracking-widest text-white/70 font-bold flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span> {t('dashboard.recent_uplinks')}
+              <h3 className="text-[10px] uppercase tracking-[0.2em] text-white/60 font-bold flex items-center gap-2">
+                <span className="w-2 h-2 rounded-sm bg-purple-500 shadow-[0_0_8px_purple]"></span> {t('dashboard.recent_uplinks')}
               </h3>
               {history.length > 0 && (
                 <button
@@ -1126,32 +1218,37 @@ function App() {
             </div>
             <div className="flex-1 overflow-y-auto pr-1 space-y-2 custom-scrollbar">
               {history.length === 0 && (
-                <div className="text-white/50 text-xs text-center py-8 border border-dashed border-white/5 rounded-xl">
-                  {t('dashboard.no_history')}
+                <div className="h-full flex flex-col items-center justify-center text-white/30 border-2 border-dashed border-white/5 rounded-xl">
+                  <span className="text-2xl mb-2 opacity-50">📂</span>
+                  <span className="text-[10px] uppercase tracking-wider">{t('dashboard.no_history')}</span>
                 </div>
               )}
               {history.map((item) => (
-                <div key={item.id} className="relative bg-white/5 p-3 rounded-xl border border-white/20 hover:bg-white/10 transition-colors group">
+                <div key={item.id} className="relative bg-black/40 p-3 group border-l-2 border-l-transparent hover:border-l-cyan-500 transition-all">
+
+                  {/* Tactical Decorations */}
+                  <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/10 group-hover:border-cyan-500/50"></div>
+                  <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/10 group-hover:border-cyan-500/50"></div>
 
                   {/* Delete Item Button (Visible on Hover) */}
                   <button
                     onClick={(e) => { e.stopPropagation(); deleteHistoryItem(item.id); }}
-                    className="absolute top-2 right-2 text-white/10 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all font-bold text-xs p-1"
+                    className="absolute top-2 right-2 text-white/10 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all font-bold text-xs p-1 z-20"
                     title={t('dashboard.remove_history')}
                   >
                     ✕
                   </button>
 
-                  <div className="flex justify-between items-start mb-1 pr-6">
-                    <span className={`text-[10px] uppercase font-bold px-1.5 py-0.5 rounded ${item.type === 'send' ? 'bg-cyan-500/20 text-cyan-300' : 'bg-purple-500/20 text-purple-300'}`}>
+                  <div className="flex justify-between items-start mb-2 pr-6">
+                    <span className={`text-[8px] uppercase font-bold px-1.5 py-0.5 rounded-sm border ${item.type === 'send' ? 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30' : 'bg-purple-500/10 text-purple-300 border-purple-500/30'}`}>
                       {item.type}
                     </span>
-                    <span className="text-[10px] text-white/60">{new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                    <span className="text-[8px] text-white/40 font-mono">{new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                   </div>
 
                   {/* Code or Contact Name Display */}
                   <div
-                    className="font-mono text-xs text-white truncate mb-1 cursor-pointer select-none"
+                    className="font-mono text-xs text-white truncate mb-1 cursor-pointer select-none pl-1"
                     title={t('dashboard.reveal_tooltip')}
                     onDoubleClick={(e) => { e.stopPropagation(); setRevealedHistoryId(revealedHistoryId === item.id ? null : item.id); }}
                   >
@@ -1159,54 +1256,59 @@ function App() {
                       const knownContact = contacts.find(c => c.code === item.code);
                       if (knownContact) {
                         return (
-                          <span className="flex items-center gap-1.5 text-cyan-400 font-bold">
+                          <span className="flex items-center gap-1.5 text-cyan-400 font-bold shadow-[0_0_10px_rgba(6,182,212,0.2)]">
                             <span className="text-[10px]">🔒</span> {knownContact.name}
                           </span>
                         );
                       }
                       // Obfuscation Logic for unknown codes
                       if (revealedHistoryId === item.id) {
-                        return <span className="text-white bg-white/10 px-1 rounded">{item.code}</span>;
+                        return <span className="text-cyan-300 tracking-wider">{item.code}</span>;
                       }
-                      return <span className="text-white/60 tracking-widest">••••-••••-••••</span>;
+                      return <span className="text-white/60 tracking-[0.2em] opacity-80">•••• •••• ••••</span>;
                     })()}
                   </div>
+
                   {item.fileName && (
-                    <div className="text-[10px] text-white/70 truncate flex items-center gap-1">
-                      📁 {item.fileName}
+                    <div className="text-[10px] text-white/50 truncate flex items-center gap-1 pl-1">
+                      <span className="opacity-50">FILE:</span> {item.fileName}
                     </div>
                   )}
 
                   {/* Add to Contacts Action */}
                   {!contacts.some(c => c.code === item.code) && item.status !== 'failed' && (
-                    <div className="mt-2 w-full">
+                    <div className="mt-3 w-full">
                       {editingContactId === item.id ? (
-                        <input
-                          autoFocus
-                          type="text"
-                          placeholder={t('dashboard.name_peer_placeholder')}
-                          className="w-full py-1 px-2 text-[10px] bg-black/40 border border-cyan-500/50 rounded text-cyan-300 placeholder:text-cyan-500/30 outline-none animate-in fade-in"
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                              const target = e.target as HTMLInputElement;
-                              if (target.value.trim()) {
-                                addContact(target.value.trim(), item.code);
-                                setEditingContactId(null);
+                        <div className="relative group/edit">
+                          <div className="absolute inset-0 bg-cyan-500/20 blur-sm"></div>
+                          <input
+                            autoFocus
+                            type="text"
+                            placeholder={t('dashboard.name_peer_placeholder')}
+                            className="relative w-full py-1 px-2 text-[10px] bg-black border border-cyan-500 text-cyan-300 placeholder:text-cyan-500/30 outline-none uppercase font-mono tracking-wider"
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') {
+                                const target = e.target as HTMLInputElement;
+                                if (target.value.trim()) {
+                                  addContact(target.value.trim(), item.code);
+                                  setEditingContactId(null);
+                                }
                               }
-                            }
-                            if (e.key === 'Escape') setEditingContactId(null);
-                          }}
-                          onBlur={() => setEditingContactId(null)}
-                        />
+                              if (e.key === 'Escape') setEditingContactId(null);
+                            }}
+                            onBlur={() => setEditingContactId(null)}
+                          />
+                        </div>
                       ) : (
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             setEditingContactId(item.id);
                           }}
-                          className="w-full py-1 text-[9px] uppercase tracking-wider font-bold text-white/60 hover:text-cyan-400 border border-white/5 hover:border-cyan-500/30 rounded bg-white/5 hover:bg-cyan-500/10 transition-all flex items-center justify-center gap-1"
+                          className="w-full py-1 text-[9px] uppercase tracking-[0.2em] font-bold text-white/40 hover:text-cyan-400 border border-white/5 hover:border-cyan-500/50 bg-transparent hover:bg-cyan-500/5 transition-all flex items-center justify-center gap-1 group/btn"
                         >
                           <span>{t('dashboard.add_link')}</span>
+                          <span className="opacity-0 group-hover/btn:opacity-100 transition-opacity text-xs">+</span>
                         </button>
                       )}
                     </div>
@@ -1218,7 +1320,7 @@ function App() {
 
         </div>
 
-      </div>
+      </div >
 
 
 
@@ -1229,7 +1331,7 @@ function App() {
           if (!contact) return null;
           return (
             <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm animate-in fade-in duration-200" onClick={() => setContactSettingsId(null)}>
-              <div className="bg-surface border border-white/10 p-6 rounded-2xl w-full max-w-sm shadow-2xl relative" onClick={e => e.stopPropagation()}>
+              <div className="bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-purple-500/10 backdrop-blur-xl border border-white/20 p-6 rounded-2xl w-full max-w-sm shadow-2xl relative" onClick={e => e.stopPropagation()}>
                 <h3 className="text-lg font-bold text-white mb-4">Link Settings</h3>
 
                 <div className="space-y-4">
@@ -1266,7 +1368,7 @@ function App() {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-white/5 flex justify-between items-center">
+                  <div className="pt-4 border-t border-white/20 flex justify-between items-center">
                     <button
                       onClick={() => {
                         if (confirm('Delete this trusted link?')) {
