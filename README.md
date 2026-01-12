@@ -12,7 +12,7 @@
 [![Electron](https://img.shields.io/badge/Electron-30+-47848F?logo=electron&logoColor=white)](https://www.electronjs.org/)
 [![Croc](https://img.shields.io/badge/Powered%20by-Croc%20🐊-green.svg)](https://github.com/schollz/croc)
 
-**Ultra-fast, end-to-end encrypted file transfers. No servers. No limits. No compromises.**
+**UNLIMITED, ultra-fast, end-to-end encrypted file transfers. No size limits. No speed caps. No compromises.**
 
 [Download](#-installation) • [Features](#-features) • [Quick Start](#-quick-start) • [How It Works](#-how-it-works) • [FAQ](#-faq)
 
@@ -42,6 +42,7 @@ Unlike cloud-based services (WeTransfer, Google Drive), your files **never touch
 
 | Feature | Description |
 |---------|-------------|
+| **ZERO LIMITS** | **Send 1GB, 100GB, or 1TB. No file size restrictions. No throttling.** |
 | **End-to-End Encryption** | PAKE (Password Authenticated Key Exchange) ensures only sender and receiver can access files |
 | **Zero Knowledge** | No servers, no logs, no metadata collection |
 | **Direct P2P Transfer** | Files travel directly between devices - nothing stored in the cloud |
@@ -49,7 +50,7 @@ Unlike cloud-based services (WeTransfer, Google Drive), your files **never touch
 
 ###  **Blazing Fast Transfers**
 
-- **No File Size Limits** — Transfer gigabytes without restrictions
+- **Truly UNLIMITED** — Send massive files (ISO, 4K Video, RAW Photos) without paying a cent
 - **Multi-Connection Architecture** — Utilizes your full bandwidth
 - **Resume Interrupted Transfers** — Pick up where you left off
 - **Real-Time Progress** — Live speed, ETA, and percentage tracking
