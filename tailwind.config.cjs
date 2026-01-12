@@ -7,8 +7,8 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                background: '#0a0a0f', // Deep space/ocean
-                surface: '#12121e',
+                background: '#32393C', // Slate Grey background
+                surface: '#111213', // Deep Tactical Card (Darker)
                 primary: '#00f0ff', // Cyberpunk Blue/Neon
                 secondary: '#00d0ff',
                 accent: '#f000ff', // Neon Pink
