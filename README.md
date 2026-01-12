@@ -2,7 +2,7 @@
 
 <img src="./src/assets/NFastIcon.png" alt="NFast Logo" width="128" height="128" />
 
-# ⚡ NFast PRO
+#  NFast PRO
 
 ### Secure Peer-to-Peer File Transfer Protocol
 
@@ -20,7 +20,7 @@
 
 </div>
 
-## 🚀 What is NFast?
+##  What is NFast?
 
 **NFast PRO** is a premium desktop application for secure, high-speed file transfers using peer-to-peer (P2P) technology. Built on the battle-tested [croc](https://github.com/schollz/croc) protocol, NFast provides military-grade encryption with a stunning modern interface.
 
@@ -36,9 +36,9 @@ Unlike cloud-based services (WeTransfer, Google Drive), your files **never touch
 
 ---
 
-## ✨ Features
+##  Features
 
-### 🔐 **Military-Grade Security**
+###  **Military-Grade Security**
 
 | Feature | Description |
 |---------|-------------|
@@ -47,14 +47,14 @@ Unlike cloud-based services (WeTransfer, Google Drive), your files **never touch
 | **Direct P2P Transfer** | Files travel directly between devices - nothing stored in the cloud |
 | **Encrypted Relay Fallback** | If direct connection fails, encrypted data routes through relay (unreadable to relay) |
 
-### ⚡ **Blazing Fast Transfers**
+###  **Blazing Fast Transfers**
 
 - **No File Size Limits** — Transfer gigabytes without restrictions
 - **Multi-Connection Architecture** — Utilizes your full bandwidth
 - **Resume Interrupted Transfers** — Pick up where you left off
 - **Real-Time Progress** — Live speed, ETA, and percentage tracking
 
-### 🎨 **Premium User Experience**
+###  **Premium User Experience**
 
 - **Drag & Drop Interface** — Simply drop files to send
 - **One-Click Code Sharing** — WhatsApp, Telegram, Discord integration
@@ -63,7 +63,7 @@ Unlike cloud-based services (WeTransfer, Google Drive), your files **never touch
 - **Transfer History** — Track past uploads with privacy obfuscation
 - **Multi-Language Support** — English & Spanish built-in
 
-### 🔧 **Advanced Features**
+###  **Advanced Features**
 
 - **Custom Relay Servers** — Use your own private relay for corporate networks
 - **Stealth/Tunnel Mode** — Auto-connect with trusted contacts
@@ -72,7 +72,7 @@ Unlike cloud-based services (WeTransfer, Google Drive), your files **never touch
 
 ---
 
-## 📦 Installation
+##  Installation
 
 ### System Requirements
 
@@ -100,17 +100,17 @@ Unlike cloud-based services (WeTransfer, Google Drive), your files **never touch
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Sending Files
 
 1. **Launch NFast PRO**
 2. **Drag files** onto the drop zone (or click to browse)
 3. **Share the generated code** with the recipient via:
-   - 📋 Copy to clipboard
-   - 💬 WhatsApp
-   - ✈️ Telegram
-   - 🎮 Discord
+   -  Copy to clipboard
+   -  WhatsApp
+   -  Telegram
+   -  Discord
 4. **Wait for connection** — transfer starts automatically when recipient enters code
 
 ### Receiving Files
@@ -130,7 +130,7 @@ For frequent contacts, save them as **Trusted Links**:
 
 ---
 
-## 🔧 How It Works
+##  How It Works
 
 ```
 ┌──────────────┐                                    ┌──────────────┐
@@ -158,7 +158,7 @@ NFast uses the **croc** protocol, which provides:
 
 ---
 
-## ⚙️ Configuration
+##  Configuration
 
 ### Custom Relay Server
 
@@ -181,7 +181,7 @@ Switch between **English** and **Spanish** in **Settings** → **Language**
 
 ---
 
-## 🔄 Auto-Updates
+##  Auto-Updates
 
 NFast PRO includes automatic updates from GitHub Releases:
 
@@ -195,7 +195,7 @@ Download the latest version from our [Releases Page](https://github.com/xBeastxx
 
 ---
 
-## ❓ FAQ
+##  FAQ
 
 <details>
 <summary><b>Is NFast truly private?</b></summary>
@@ -247,7 +247,7 @@ This is a **false positive** common with unsigned Electron apps. NFast is safe. 
 
 ---
 
-## 💻 Tech Stack
+##  Tech Stack
 
 | Layer | Technology |
 |-------|------------|
@@ -261,7 +261,7 @@ This is a **false positive** common with unsigned Electron apps. NFast is safe. 
 
 ---
 
-## 🛡️ Security & Privacy
+##  Security & Privacy
 
 ### What We DON'T Collect
 
@@ -283,7 +283,7 @@ This is a **false positive** common with unsigned Electron apps. NFast is safe. 
 
 ---
 
-## 📜 Legal
+##  Legal
 
 ### License
 
@@ -303,35 +303,35 @@ Additional open-source components:
 
 ---
 
-## 🤝 Support & Contact
+##  Support & Contact
 
 ### Community
 
-- 🐛 **Bug Reports:** [GitHub Issues](https://github.com/xBeastxx/NFast/issues)
-- 💬 **Discord:** [Join our server](https://discord.gg/nauticgames)
+-  **Bug Reports:** [GitHub Issues](https://github.com/xBeastxx/NFast/issues)
+-  **Discord:** [Join our server](https://discord.gg/nauticgames)
 
 ### Contact
 
-- 📧 **Email:** nauticgamesstudios@gmail.com
-- 🌐 **Website:** [nauticgames.com](https://nauticgames.com)
+-  **Email:** nauticgamesstudios@gmail.com
+-  **Website:** [nauticgames.com](https://nauticgames.com)
 
 ---
 
-## 🗺️ Roadmap
+##  Roadmap
 
-### ✅ v1.0.1 (Current)
+###  v1.0.1 (Current)
 - Secure P2P file transfer
 - Trusted Links system
 - Multi-language support
 - Auto-updates
 
-### 🔜 v1.1.0 (Planned)
+###  v1.1.0 (Planned)
 - [ ] Folder transfer support
 - [ ] Transfer queue
 - [ ] Dark/Light theme toggle
 - [ ] Sound notifications
 
-### 🔮 Future
+###  Future
 - [ ] macOS & Linux builds
 - [ ] Mobile companion app
 - [ ] QR code pairing
@@ -341,7 +341,7 @@ Additional open-source components:
 
 <div align="center">
 
-## ⭐ Star this repo if NFast helped you!
+##  Star this repo if NFast helped you!
 
 ---
 
