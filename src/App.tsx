@@ -516,12 +516,22 @@ function App() {
                   </h2>
                 </div>
               </div>
-              <button
-                onClick={() => setShowGlobalSettings(false)}
-                className="w-8 h-8 rounded-lg border border-white/20 hover:border-red-500/50 hover:bg-red-500/10 flex items-center justify-center text-white/80 hover:text-red-400 transition-all active:scale-95 group"
-              >
-                <span className="group-hover:rotate-90 transition-transform">✕</span>
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => window.ipcRenderer.openExternal('https://ko-fi.com/nauticgames')}
+                  className="h-8 px-3 rounded-lg border border-green-500/30 bg-green-500/10 hover:bg-green-500/20 text-green-400 text-xs font-bold tracking-wider flex items-center gap-2 transition-all hover:shadow-[0_0_10px_rgba(34,197,94,0.3)]"
+                  title={t('settings.main.btn_donate')}
+                >
+                  <span>☕</span>
+                  <span className="hidden sm:inline">DONATE</span>
+                </button>
+                <button
+                  onClick={() => setShowGlobalSettings(false)}
+                  className="w-8 h-8 rounded-lg border border-white/20 hover:border-red-500/50 hover:bg-red-500/10 flex items-center justify-center text-white/80 hover:text-red-400 transition-all active:scale-95 group"
+                >
+                  <span className="group-hover:rotate-90 transition-transform">✕</span>
+                </button>
+              </div>
             </div>
 
             {/* Modal Content - Dynamic View */}
@@ -621,38 +631,49 @@ function App() {
                   {/* Bottom Navigation Buttons */}
                   <div className="flex-none pt-4 border-t border-white/10">
                     <h3 className="text-[9px] uppercase tracking-[0.2em] text-white/40 font-bold mb-4">{t('settings.main.about_legal')}</h3>
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-4 gap-3">
                       <button
                         onClick={() => setSettingsView('privacy')}
-                        className="bg-black/20 hover:bg-cyan-900/10 border border-white/10 hover:border-cyan-500/50 p-4 transition-all group relative overflow-hidden"
+                        className="bg-black/20 hover:bg-cyan-900/10 border border-white/10 hover:border-cyan-500/50 p-2 transition-all group relative overflow-hidden"
                       >
                         <div className="absolute top-0 right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="w-2 h-2 bg-cyan-500 rounded-full shadow-[0_0_5px_cyan]"></div>
+                          <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full shadow-[0_0_5px_cyan]"></div>
                         </div>
-                        <span className="block text-xl mb-2 grayscale group-hover:grayscale-0 transition-all">🔒</span>
-                        <span className="text-[10px] font-bold text-white/70 group-hover:text-cyan-400 tracking-wider block">{t('settings.main.btn_privacy')}</span>
+                        <span className="block text-xl mb-1 grayscale group-hover:grayscale-0 transition-all">🔒</span>
+                        <span className="text-[9px] font-bold text-white/70 group-hover:text-cyan-400 tracking-wider block">{t('settings.main.btn_privacy')}</span>
                       </button>
 
                       <button
                         onClick={() => setSettingsView('terms')}
-                        className="bg-black/20 hover:bg-purple-900/10 border border-white/10 hover:border-purple-500/50 p-4 transition-all group relative overflow-hidden"
+                        className="bg-black/20 hover:bg-purple-900/10 border border-white/10 hover:border-purple-500/50 p-2 transition-all group relative overflow-hidden"
                       >
                         <div className="absolute top-0 right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="w-2 h-2 bg-purple-500 rounded-full shadow-[0_0_5px_purple]"></div>
+                          <div className="w-1.5 h-1.5 bg-purple-500 rounded-full shadow-[0_0_5px_purple]"></div>
                         </div>
-                        <span className="block text-xl mb-2 grayscale group-hover:grayscale-0 transition-all">📄</span>
-                        <span className="text-[10px] font-bold text-white/70 group-hover:text-purple-400 tracking-wider block">{t('settings.main.btn_terms')}</span>
+                        <span className="block text-xl mb-1 grayscale group-hover:grayscale-0 transition-all">📄</span>
+                        <span className="text-[9px] font-bold text-white/70 group-hover:text-purple-400 tracking-wider block">{t('settings.main.btn_terms')}</span>
                       </button>
 
                       <button
                         onClick={() => setSettingsView('credits')}
-                        className="bg-black/20 hover:bg-green-900/10 border border-white/10 hover:border-green-500/50 p-4 transition-all group relative overflow-hidden"
+                        className="bg-black/20 hover:bg-green-900/10 border border-white/10 hover:border-green-500/50 p-2 transition-all group relative overflow-hidden"
                       >
                         <div className="absolute top-0 right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_5px_green]"></div>
+                          <div className="w-1.5 h-1.5 bg-green-500 rounded-full shadow-[0_0_5px_green]"></div>
                         </div>
-                        <span className="block text-xl mb-2 grayscale group-hover:grayscale-0 transition-all">⚡</span>
-                        <span className="text-[10px] font-bold text-white/70 group-hover:text-green-400 tracking-wider block">{t('settings.main.btn_credits')}</span>
+                        <span className="block text-xl mb-1 grayscale group-hover:grayscale-0 transition-all">⚡</span>
+                        <span className="text-[9px] font-bold text-white/70 group-hover:text-green-400 tracking-wider block">{t('settings.main.btn_credits')}</span>
+                      </button>
+
+                      <button
+                        onClick={() => window.ipcRenderer.openExternal('https://ko-fi.com/nauticgames')}
+                        className="bg-black/20 hover:bg-pink-900/10 border border-white/10 hover:border-pink-500/50 p-2 transition-all group relative overflow-hidden"
+                      >
+                        <div className="absolute top-0 right-0 p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="w-1.5 h-1.5 bg-pink-500 rounded-full shadow-[0_0_5px_pink]"></div>
+                        </div>
+                        <span className="block text-xl mb-1 grayscale group-hover:grayscale-0 transition-all">☕</span>
+                        <span className="text-[9px] font-bold text-white/70 group-hover:text-pink-400 tracking-wider block">{t('settings.main.btn_donate')}</span>
                       </button>
                     </div>
                   </div>

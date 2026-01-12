@@ -86,7 +86,8 @@ export const es = {
                 about_legal: "Sobre y Legal",
                 btn_privacy: "Privacidad",
                 btn_terms: "Términos",
-                btn_credits: "Créditos"
+                btn_credits: "Créditos",
+                btn_donate: "Donar"
             },
             privacy: {
                 last_updated: "Última Actualización: Diciembre 2025",
